@@ -31,7 +31,9 @@
 
             <div class="card swiper-slide">
                 <div class="card_image">
+                <a href="views/years/dua_empat.php">
                     <img src="public/assets/img/dua_lima.jpg" alt="">
+</a>
                 </div>
             </div>
 
