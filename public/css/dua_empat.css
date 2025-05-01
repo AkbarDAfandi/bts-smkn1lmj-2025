@@ -1,0 +1,373 @@
+@import url('https://fonts.googleapis.com/css2?family=Jacques+Francois&family=La+Belle+Aurore&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inria+Serif:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&display=swap');
+
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    border: none;
+    outline: none;
+    scroll-behavior: smooth;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  width: 100%;
+  background-color: #f8f9fa;
+}
+
+  .header {
+    background-color: #E2EEFF; /* Warna latar belakang header */
+    padding: 15px 20px; /* Padding atas-bawah dan kiri-kanan */
+    display: flex; /* Menggunakan flexbox untuk tata letak */
+    align-items: center; /* Membuat item vertikal berada di tengah */
+    justify-content: space-between; /* Memberikan ruang di antara elemen */
+    border-bottom: 1px solid #eee; /* Garis bawah tipis */
+}
+
+.header-content {
+    display: flex; /* Menggunakan flexbox untuk tata letak konten */
+    align-items: center; /* Membuat item vertikal berada di tengah */
+}
+
+.header-content img {
+    height: 50px; /* Tinggi logo */
+    margin-right: 15px; /* Jarak antara logo dan teks */
+}
+
+.header-content p {
+    font-size: 3em; /* Ukuran font teks */
+    font-family : "Jacques Francois", cursive;
+    color: black; /* Warna teks */
+    margin: 0; /* Menghilangkan margin default pada tag <p> */
+}
+
+.Download-button {
+    background-color: #ffffff; /* Warna latar belakang tombol */
+    color: black; /* Warna teks tombol */
+    padding: 10px 15px; /* Padding tombol */
+    border: none; /* Menghilangkan border tombol */
+    border-radius: 30px; /* Membuat sudut tombol menjadi tumpul */
+    cursor: pointer; /* Mengubah kursor menjadi pointer saat dihover */
+    font-size: 1em; /* Ukuran font tombol */
+}
+
+.Download-button:hover {
+    background-color:rgb(192, 220, 251); /* Warna latar belakang tombol saat dihover */
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Video frame adjustments */
+.custom-video-frame {
+    position: relative;
+    width: 100%;
+    max-width: 560px; /* Maksimal lebar sesuai ukuran asli iframe */
+    margin: 0 auto;
+}
+
+/* Frame PNG Overlay */
+.frame-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+    pointer-events: none;
+    object-fit: contain;
+}
+
+/* Video Wrapper */
+.youtube-video {
+    position: relative;
+    z-index: 2;
+    padding: 15px; /* Sesuaikan dengan border image */
+    width: 100%;
+}
+
+/* Responsive Video Iframe */
+.youtube-video iframe {
+    width: 100%;
+    height: auto; /* Ubah dari fixed height ke auto */
+    aspect-ratio: 16/9; /* Pertahankan rasio 16:9 */
+    display: block;
+}
+
+/* Button styles (enhanced) */
+.layout-button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 15px 10px;
+    background: #ffffff;
+    border: 2px solid #f0f0f0;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    height: 80px;
+    text-align: center;
+}
+
+.layout-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+    background: #f8f8f8;
+}
+
+.layout-button p {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+}
+
+.layout-button i {
+    margin-top: 5px;
+    font-size: 18px;
+}
+
+/* Horizontal alignment for desktop */
+@media (min-width: 769px) {
+    .content {
+        flex-direction: row; /* Side by side layout */
+        align-items: flex-start; /* Align to top */
+        gap: 30px; /* Space between video and buttons */
+    }
+
+    .custom-video-frame {
+        width: 560px; /* Fixed size on desktop */
+    }
+
+    .video-container {
+        flex: 0 0 auto; /* Don't grow or shrink */
+    }
+
+    .layout-container {
+        flex: 1; /* Take remaining space */
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* 2-column grid */
+        gap: 15px;
+        align-content: start; /* Align grid to top */
+    }
+}
+
+/* Mobile layout (buttons below video) */
+@media (max-width: 768px) {
+    .custom-video-frame {
+        padding: 0 10px; /* Add some side padding on mobile */
+    }
+    
+    .frame-image {
+        transform: scale(1.03); /* Penyesuaian halus untuk mobile */
+    }
+    
+    .youtube-video {
+        padding: 1px; /* Slightly less padding on mobile */
+    }
+    
+    .layout-container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        margin-top: 20px;
+    }
+}
+  /* .layout-button,  {
+    display: inline-block;
+    height: 80px;
+    margin: 5px;
+    padding: 30px;
+    text-align: center;
+    text-decoration: none;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.layout-button {
+    width: 40.5%;
+}
+
+.layout-button-osis {
+    width: 82%;
+}
+
+.layout-button:hover, .layout-button-osis:hover {
+    background-color: #0056b3;
+}
+
+.layout-button p {
+    margin: 0;
+    font-size: 16px;
+    font-family: Poppins;
+} */
+
+
+.content-book {
+  margin-left: 20px;
+}
+  .buku-kelas {
+  display: flex;
+  margin-left: 10px;
+  overflow-x: auto;
+  gap: 1px;
+}
+.buku-kelas::-webkit-scrollbar {
+  width: 0; 
+}
+ p {
+  font-size: 2em;
+  font-weight: bold;
+  padding: 15px;
+  display: block;
+  margin: 0;
+}
+
+.buku-kelas-card {
+  flex: 0 0 220px;
+  text-align: left;
+}
+
+.buku-kelas-card img {
+  width: 100%;
+  max-width: 180px;
+  height: auto;
+  margin: 0 auto 15px 0;
+  display: block;
+}
+
+.buku-kelas-card h1 {
+  font-size: 1.4em;
+  margin: 0 0 5px 0;
+  padding-bottom: 5px;
+  border-bottom: 2px solid #007bff;
+  display: inline-block;
+  font-family: 'Newsreader', serif;
+  text-align: left;
+}
+
+.buku-kelas-card h2 {
+  font-size: 1em;
+  color: #666;
+  margin: 0 0 15px 0;
+  font-family: 'Poppins', sans-serif;
+  text-align: left;
+}
+
+.buku-kelas-card button {
+  background-color: transparent;
+  color: #007bff;
+  border: 1px solid #007bff;
+  border-radius: 5px;
+  padding: 8px 15px;
+  cursor: pointer;
+  font-size: 0.9em;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  display: block;
+  width: 180px;
+  margin: 0;
+}
+
+.buku-kelas-card button:hover {
+  background-color: #007bff;
+  color: white;
+}
+
+
+.site-footer {
+    background-color: #2c3e50;
+    color: #ecf0f1;
+    padding: 1.5rem 0;
+    margin-top: 2rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.footer-brand {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.footer-title {
+    font-size: 1.5rem;
+    margin: 0;
+    font-weight: 600;
+    color: #fff;
+}
+
+.footer-social {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+}
+
+.footer-social a {
+    color: #ecf0f1;
+    font-size: 1.8rem;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.footer-social a:hover {
+    color: #3498db;
+    transform: translateY(-3px);
+}
+
+.footer-info {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.copyright, .credits {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #bdc3c7;
+}
+
+.credits {
+    font-size: 0.85rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .footer-title {
+        font-size: 1.2rem;
+    }
+    
+    .footer-social {
+        gap: 1rem;
+    }
+    
+    .footer-social a {
+        font-size: 1.5rem;
+    }
+}
