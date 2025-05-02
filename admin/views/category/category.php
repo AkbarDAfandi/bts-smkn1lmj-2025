@@ -25,7 +25,7 @@ if (isset($_GET['delete'])) {
         $stmt = $pdo->prepare("DELETE FROM categories WHERE id = ?");
         $stmt->execute([$id]);
         $_SESSION['success'] = "Kategori berhasil dihapus";
-        header("Location: " . BASE_URL . "views/category/category.php");
+        header("Location: " . BASE_URL . "admin/views/category/category.php");
         exit();
     } catch (PDOException $e) {
         $_SESSION['error'] = "Gagal menghapus kategori: " . $e->getMessage();

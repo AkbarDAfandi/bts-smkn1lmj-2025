@@ -2,7 +2,8 @@
 
 // base url
 
-define('BASE_URL', 'http://' . $_SERVER['HTTP_HOST'] . '/bts-smkn1lmj/admin');
+define('BASE_URL', 'http://' . $_SERVER['HTTP_HOST'] . '/bts-smkn1lmj-2025/'); 
+
 
 
 $host = 'localhost';
