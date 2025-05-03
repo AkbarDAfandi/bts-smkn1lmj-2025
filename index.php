@@ -22,7 +22,7 @@
 
             <div class="card swiper-slide">
                 <div class="card_image">
-                    <a href="views/years/dua_empat.php">
+                    <a href="views/years/2024/index.php">
                         <img src="public/assets/img/dua_empat.jpg" alt="">
                     </a>
                     
@@ -31,7 +31,7 @@
 
             <div class="card swiper-slide">
                 <div class="card_image">
-                <a href="views/years/dua_empat.php">
+                <a href="views/years/2024/index.php">
                     <img src="public/assets/img/dua_lima.jpg" alt="">
 </a>
                 </div>

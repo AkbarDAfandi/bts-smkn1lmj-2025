@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../public/css/dua_empat.css">
+    <link rel="stylesheet" href="../../../public/css/dua_empat.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <title>Document</title>
 </head>
@@ -19,7 +19,7 @@
     <section class="content">
             <div class="video-container">
                 <div class="custom-video-frame">
-                    <img src="../../public/assets/img/border.png" class="frame-image" alt="Video Frame">
+                    <img src="../../../public/assets/img/border.png" class="frame-image" alt="Video Frame">
                     <div class="youtube-video">
                         <iframe width="560" height="315" src="https://www.youtube.com/embed/IUqF6cAKR6Q?si=HBdTR8qiECEJW-E-" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                     </div>
@@ -54,21 +54,21 @@
         <p>SISWA DAN SISWI</p>
             <div class="buku-kelas">
                 <div class="buku-kelas-card">
-                    <img src="../../public/assets/buku-perkelas/akuntansi3.png" alt="">
+                    <img src="../../../public/assets/buku-perkelas/akuntansi3.png" alt="">
                     <h1>judul</h1>
                     <h2>Subjudul</h2>
                     <hr>    
                     <button>Lihat selengkapnya</button>
                 </div>
                 <div class="buku-kelas-card">
-                    <img src="../../public/assets/buku-perkelas/manajemen-perkantoran2.png" alt="">
+                    <img src="../../../public/assets/buku-perkelas/manajemen-perkantoran2.png" alt="">
                     <h1>judul</h1>
                     <h2>Subjudul</h2>
                     <hr>    
                     <button>Lihat selengkapnya</button>
                 </div>
                 <div class="buku-kelas-card">
-                    <img src="../../public/assets/buku-perkelas/rpl-11.png" alt="">
+                    <img src="../../../public/assets/buku-perkelas/rpl-11.png" alt="">
                     <h1>judul</h1>
                     <h2>Subjudul</h2>
                     <hr>    
@@ -76,7 +76,7 @@
                 </div>
                 
                 <div class="buku-kelas-card">
-                    <img src="../../public/assets/buku-perkelas/osis55.png" alt="">
+                    <img src="../../../public/assets/buku-perkelas/osis55.png" alt="">
                     <h1>judul</h1>
                     <h2>Subjudul</h2>
                     <hr>    
@@ -88,28 +88,28 @@
         <p>EKSTRAKURIKULER</p>
             <div class="buku-kelas">
                 <div class="buku-kelas-card">
-                    <img src="../../public/assets/buku-perkelas/akuntansi3.png" alt="">
+                    <img src="../../../public/assets/buku-perkelas/akuntansi3.png" alt="">
                     <h1>judul</h1>
                     <h2>Subjudul</h2>
                     <hr>    
                     <button>Lihat selengkapnya</button>
                 </div>
                 <div class="buku-kelas-card">
-                    <img src="../../public/assets/buku-perkelas/mp1.png" alt="">
+                    <img src="../../../public/assets/buku-perkelas/mp1.png" alt="">
                     <h1>judul</h1>
                     <h2>Subjudul</h2>
                     <hr>    
                     <button>Lihat selengkapnya</button>
                 </div>
                 <div class="buku-kelas-card">
-                    <img src="../../public/assets/buku-perkelas/akuntansi3.png" alt="">
+                    <img src="../../../public/assets/buku-perkelas/akuntansi3.png" alt="">
                     <h1>judul</h1>
                     <h2>Subjudul</h2>
                     <hr>    
                     <button>Lihat selengkapnya</button>
                 </div>
                 <div class="buku-kelas-card">
-                    <img src="../../public/assets/buku-perkelas/manajemen-perkantoran2.png" alt="">
+                    <img src="../../../public/assets/buku-perkelas/manajemen-perkantoran2.png" alt="">
                     <h1>judul</h1>
                     <h2>Subjudul</h2>
                     <hr>    
@@ -120,7 +120,7 @@
         <p>Lainnya</p>
             <div class="buku-kelas">
                 <div class="buku-kelas-card">
-                    <img src="../../public/assets/buku-perkelas/akuntansi3.png" alt="">
+                    <img src="../../../public/assets/buku-perkelas/akuntansi3.png" alt="">
                     <h1>judul</h1>
                     <h2>Subjudul</h2>
                     <hr>    
