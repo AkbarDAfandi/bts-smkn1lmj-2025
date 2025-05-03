@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../../public/css/dua_empat.css">
+    <link rel="stylesheet" href="../../../public/css/dua_lima.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <title>Document</title>
 </head>
@@ -11,7 +11,7 @@
     <header class="header">
         <div class="header-content">
             <img src="../../../public/assets/img/logosmk.png" alt="">
-            <p>Buku Tahunan Siswa - 2024</p>
+            <p>Buku Tahunan Siswa - 2025</p>
         </div>
         <button class="Download-button">Download</button>
     </header>
