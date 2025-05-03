@@ -10,8 +10,8 @@
 <body>
     <header class="header">
         <div class="header-content">
-            <img src="../../public/assets/img/logosmk.png" alt="">
-            <p>Buku Tahunan Siswa</p>
+            <img src="../../../public/assets/img/logosmk.png" alt="">
+            <p>Buku Tahunan Siswa - 2024</p>
         </div>
         <button class="Download-button">Download</button>
     </header>
@@ -51,68 +51,125 @@
         </section>
 
         <section class="content-book">
-        <p>SISWA DAN SISWI</p>
+        <p>Siswa dan Siswi</p>
             <div class="buku-kelas">
                 <div class="buku-kelas-card">
-                    <img src="../../../public/assets/buku-perkelas/akuntansi3.png" alt="">
-                    <h1>judul</h1>
-                    <h2>Subjudul</h2>
-                    <hr>    
+                    <img src="../../../public/assets/buku-perkelas/osis55.png" alt="">
+                    <h1>KELAS</h1>
+                    <h2>Oleh SMKN 1 Lumajang</h2>
+                    <hr style="height:0.05em; border-width:0; background-color:black; margin-bottom:10px">   
                     <button>Lihat selengkapnya</button>
                 </div>
                 <div class="buku-kelas-card">
-                    <img src="../../../public/assets/buku-perkelas/manajemen-perkantoran2.png" alt="">
-                    <h1>judul</h1>
-                    <h2>Subjudul</h2>
-                    <hr>    
+                    <img src="../../../public/assets/buku-perkelas/osis55.png" alt="">
+                    <h1>KELAS</h1>
+                    <h2>Oleh SMKN 1 Lumajang</h2>
+                    <hr style="height:0.05em; border-width:0; background-color:black; margin-bottom:10px">   
                     <button>Lihat selengkapnya</button>
                 </div>
                 <div class="buku-kelas-card">
-                    <img src="../../../public/assets/buku-perkelas/rpl-11.png" alt="">
-                    <h1>judul</h1>
-                    <h2>Subjudul</h2>
-                    <hr>    
+                    <img src="../../../public/assets/buku-perkelas/osis55.png" alt="">
+                    <h1>KELAS</h1>
+                    <h2>Oleh SMKN 1 Lumajang</h2>
+                    <hr style="height:0.05em; border-width:0; background-color:black; margin-bottom:10px">   
                     <button>Lihat selengkapnya</button>
                 </div>
                 
                 <div class="buku-kelas-card">
                     <img src="../../../public/assets/buku-perkelas/osis55.png" alt="">
-                    <h1>judul</h1>
-                    <h2>Subjudul</h2>
-                    <hr>    
+                    <h1>KELAS</h1>
+                    <h2>Oleh SMKN 1 Lumajang</h2>
+                    <hr style="height:0.05em; border-width:0; background-color:black; margin-bottom:10px">   
+                    <button>Lihat selengkapnya</button>
+                </div>
+                <div class="buku-kelas-card">
+                    <img src="../../../public/assets/buku-perkelas/osis55.png" alt="">
+                    <h1>KELAS</h1>
+                    <h2>Oleh SMKN 1 Lumajang</h2>
+                    <hr style="height:0.05em; border-width:0; background-color:black; margin-bottom:10px">   
+                    <button>Lihat selengkapnya</button>
+                </div>
+                <div class="buku-kelas-card">
+                    <img src="../../../public/assets/buku-perkelas/osis55.png" alt="">
+                    <h1>KELAS</h1>
+                    <h2>Oleh SMKN 1 Lumajang</h2>
+                    <hr style="height:0.05em; border-width:0; background-color:black; margin-bottom:10px">   
+                    <button>Lihat selengkapnya</button>
+                </div>
+                <div class="buku-kelas-card">
+                    <img src="../../../public/assets/buku-perkelas/osis55.png" alt="">
+                    <h1>KELAS</h1>
+                    <h2>Oleh SMKN 1 Lumajang</h2>
+                    <hr style="height:0.05em; border-width:0; background-color:black; margin-bottom:10px">   
+                    <button>Lihat selengkapnya</button>
+                </div>
+                
+                <div class="buku-kelas-card">
+                    <img src="../../../public/assets/buku-perkelas/osis55.png" alt="">
+                    <h1>KELAS</h1>
+                    <h2>Oleh SMKN 1 Lumajang</h2>
+                    <hr style="height:0.05em; border-width:0; background-color:black; margin-bottom:10px">   
                     <button>Lihat selengkapnya</button>
                 </div>
             </div>
         </section>
         <section class="content-book">
-        <p>EKSTRAKURIKULER</p>
+        <p>Ekstrakurikuler</p>
             <div class="buku-kelas">
                 <div class="buku-kelas-card">
                     <img src="../../../public/assets/buku-perkelas/akuntansi3.png" alt="">
-                    <h1>judul</h1>
-                    <h2>Subjudul</h2>
-                    <hr>    
-                    <button>Lihat selengkapnya</button>
-                </div>
-                <div class="buku-kelas-card">
-                    <img src="../../../public/assets/buku-perkelas/mp1.png" alt="">
-                    <h1>judul</h1>
-                    <h2>Subjudul</h2>
-                    <hr>    
+                    <h1>EKSTRAKURIKULER</h1>
+                    <h2>Oleh SMKN 1 Lumajang</h2>
+                    <hr style="height:0.05em; border-width:0; background-color:black; margin-bottom:10px">   
                     <button>Lihat selengkapnya</button>
                 </div>
                 <div class="buku-kelas-card">
                     <img src="../../../public/assets/buku-perkelas/akuntansi3.png" alt="">
-                    <h1>judul</h1>
-                    <h2>Subjudul</h2>
-                    <hr>    
+                    <h1>EKSTRAKURIKULER</h1>
+                    <h2>Oleh SMKN 1 Lumajang</h2>
+                    <hr style="height:0.05em; border-width:0; background-color:black; margin-bottom:10px">   
                     <button>Lihat selengkapnya</button>
                 </div>
                 <div class="buku-kelas-card">
-                    <img src="../../../public/assets/buku-perkelas/manajemen-perkantoran2.png" alt="">
-                    <h1>judul</h1>
-                    <h2>Subjudul</h2>
-                    <hr>    
+                    <img src="../../../public/assets/buku-perkelas/akuntansi3.png" alt="">
+                    <h1>EKSTRAKURIKULER</h1>
+                    <h2>Oleh SMKN 1 Lumajang</h2>
+                    <hr style="height:0.05em; border-width:0; background-color:black; margin-bottom:10px">   
+                    <button>Lihat selengkapnya</button>
+                </div>
+                <div class="buku-kelas-card">
+                    <img src="../../../public/assets/buku-perkelas/akuntansi3.png" alt="">
+                    <h1>EKSTRAKURIKULER</h1>
+                    <h2>Oleh SMKN 1 Lumajang</h2>
+                    <hr style="height:0.05em; border-width:0; background-color:black; margin-bottom:10px">   
+                    <button>Lihat selengkapnya</button>
+                </div>
+                <div class="buku-kelas-card">
+                    <img src="../../../public/assets/buku-perkelas/akuntansi3.png" alt="">
+                    <h1>EKSTRAKURIKULER</h1>
+                    <h2>Oleh SMKN 1 Lumajang</h2>
+                    <hr style="height:0.05em; border-width:0; background-color:black; margin-bottom:10px">   
+                    <button>Lihat selengkapnya</button>
+                </div>
+                <div class="buku-kelas-card">
+                    <img src="../../../public/assets/buku-perkelas/akuntansi3.png" alt="">
+                    <h1>EKSTRAKURIKULER</h1>
+                    <h2>Oleh SMKN 1 Lumajang</h2>
+                    <hr style="height:0.05em; border-width:0; background-color:black; margin-bottom:10px">   
+                    <button>Lihat selengkapnya</button>
+                </div>
+                <div class="buku-kelas-card">
+                    <img src="../../../public/assets/buku-perkelas/akuntansi3.png" alt="">
+                    <h1>EKSTRAKURIKULER</h1>
+                    <h2>Oleh SMKN 1 Lumajang</h2>
+                    <hr style="height:0.05em; border-width:0; background-color:black; margin-bottom:10px">   
+                    <button>Lihat selengkapnya</button>
+                </div>
+                <div class="buku-kelas-card">
+                    <img src="../../../public/assets/buku-perkelas/akuntansi3.png" alt="">
+                    <h1>EKSTRAKURIKULER</h1>
+                    <h2>Oleh SMKN 1 Lumajang</h2>
+                    <hr style="height:0.05em; border-width:0; background-color:black; margin-bottom:10px">   
                     <button>Lihat selengkapnya</button>
                 </div>
         </section>
@@ -120,10 +177,25 @@
         <p>Lainnya</p>
             <div class="buku-kelas">
                 <div class="buku-kelas-card">
-                    <img src="../../../public/assets/buku-perkelas/akuntansi3.png" alt="">
-                    <h1>judul</h1>
-                    <h2>Subjudul</h2>
-                    <hr>    
+                    <img src="../../../public/assets/buku-perkelas/mp1.png" alt="">
+                    <h1>LAINNYA</h1>
+                    <h2>Oleh SMKN 1 Lumajang</h2>
+                    <hr style="height:0.05em; border-width:0; background-color:black; margin-bottom:10px">   
+                    <button>Lihat selengkapnya</button>
+                </div>
+                <div class="buku-kelas">
+                <div class="buku-kelas-card">
+                    <img src="../../../public/assets/buku-perkelas/mp1.png" alt="">
+                    <h1>LAINNYA</h1>
+                    <h2>Oleh SMKN 1 Lumajang</h2>
+                    <hr style="height:0.05em; border-width:0; background-color:black; margin-bottom:10px">   
+                    <button>Lihat selengkapnya</button>
+                </div>
+                <div class="buku-kelas-card">
+                    <img src="../../../public/assets/buku-perkelas/mp1.png" alt="">
+                    <h1>LAINNYA</h1>
+                    <h2>Oleh SMKN 1 Lumajang</h2>
+                    <hr style="height:0.05em; border-width:0; background-color:black; margin-bottom:10px">   
                     <button>Lihat selengkapnya</button>
                 </div>
                 

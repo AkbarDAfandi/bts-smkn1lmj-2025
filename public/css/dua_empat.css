@@ -186,43 +186,20 @@ body {
         margin-top: 20px;
     }
 }
-  /* .layout-button,  {
-    display: inline-block;
-    height: 80px;
-    margin: 5px;
-    padding: 30px;
-    text-align: center;
-    text-decoration: none;
-    color: white;
-    background-color: #007bff;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.layout-button {
-    width: 40.5%;
-}
-
-.layout-button-osis {
-    width: 82%;
-}
-
-.layout-button:hover, .layout-button-osis:hover {
-    background-color: #0056b3;
-}
-
-.layout-button p {
-    margin: 0;
-    font-size: 16px;
-    font-family: Poppins;
-} */
-
 
 .content-book {
   margin-left: 20px;
 }
+
+.content-book p{
+    font-size: 1.5em;
+    font-weight: bold;
+    padding: 60px 0 20px 10px;
+    display: block;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+  }
+
   .buku-kelas {
   display: flex;
   margin-left: 10px;
@@ -238,11 +215,13 @@ body {
   padding: 15px;
   display: block;
   margin: 0;
+  font-family: 'Poppins', sans-serif;
 }
 
+
 .buku-kelas-card {
-  flex: 0 0 220px;
   text-align: left;
+  margin: 0 20px;
 }
 
 .buku-kelas-card img {
@@ -251,43 +230,47 @@ body {
   height: auto;
   margin: 0 auto 15px 0;
   display: block;
+  align-items: center;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.3);
 }
 
 .buku-kelas-card h1 {
-  font-size: 1.4em;
-  margin: 0 0 5px 0;
-  padding-bottom: 5px;
-  border-bottom: 2px solid #007bff;
+  font-size: 1.1em;
   display: inline-block;
   font-family: 'Newsreader', serif;
   text-align: left;
+  margin-bottom: 2px;
+  font-weight: 600;
 }
 
 .buku-kelas-card h2 {
-  font-size: 1em;
+  font-size: 0.8em;
   color: #666;
-  margin: 0 0 15px 0;
+  margin-bottom: 10px;
   font-family: 'Poppins', sans-serif;
   text-align: left;
 }
 
 .buku-kelas-card button {
-  background-color: transparent;
-  color: #007bff;
-  border: 1px solid #007bff;
-  border-radius: 5px;
+  background-color: #E2EEFF;
+  color: #000000;
+  border: 1px solid #E2EEFF;
+  border-radius: 10px;
   padding: 8px 15px;
   cursor: pointer;
-  font-size: 0.9em;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  font-size: 0.8em;
   display: block;
   width: 180px;
   margin: 0;
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: 0.09em;
+  font-weight: 600;
 }
 
 .buku-kelas-card button:hover {
-  background-color: #007bff;
   color: white;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+  background: #000000;
 }
 
 
@@ -295,7 +278,7 @@ body {
     background-color: #2c3e50;
     color: #ecf0f1;
     padding: 1.5rem 0;
-    margin-top: 2rem;
+    margin-top: 7rem;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 

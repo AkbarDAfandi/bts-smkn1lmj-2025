@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -24,22 +22,22 @@
         <section class="swiper mySwiper">
             <div class="swiper-wrapper">
 
-            <div class="card swiper-slide">
-                <div class="card_image">
-                    <a href="views/years/dua_empat.php">
-                        <img src="public/assets/img/dua_empat.jpg" alt="">
-                    </a>
-                    
-                </div>
-            </div>
+                <div class="card swiper-slide">
+                    <div class="card_image">
+                        <a href="views/years/2024/index.php">
+                            <img src="public/assets/img/dua_empat.jpg" alt="">
+                        </a>
 
-            <div class="card swiper-slide">
-                <div class="card_image">
-                <a href="views/years/dua_empat.php">
-                    <img src="public/assets/img/dua_lima.jpg" alt="">
-</a>
+                    </div>
                 </div>
-            </div>
+
+                <div class="card swiper-slide">
+                    <div class="card_image">
+                        <a href="views/years/2025/index.php">
+                            <img src="public/assets/img/dua_lima.jpg" alt="">
+                        </a>
+                    </div>
+                </div>
 
                 <div class="card swiper-slide">
                     <div class="card_image">
@@ -122,7 +120,7 @@
                 pagination: {
                     el: ".swiper-pagination",
                 },
-                
+
             });
         }
     </script>
