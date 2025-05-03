@@ -23,7 +23,7 @@ require_once __DIR__ . '/../../config.php';
    <img src="../../public/assets/img/logosmk.png" alt="">
    <p>Buku Tahunan Siswa</p>
   </div>
-  <a href="../../admin/index.php">
+  <a href="">
    <button class="Download-button">Download</button>
   </a>
  </header>

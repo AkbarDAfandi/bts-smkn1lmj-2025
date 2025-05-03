@@ -81,8 +81,7 @@ if (isset($_GET['delete']) && is_numeric($_GET['delete'])) {
                         </button>
                         <div class="year-card-content" onclick="window.location.href='duaempat/duaempat.php?tahun=<?= $year ?>'">
                             <h3><?= $year ?></h3>
-                        </div>
-                    </div>
+                        </div>             </div>
                 <?php endforeach; ?>
             </div>
         </div>

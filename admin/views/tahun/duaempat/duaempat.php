@@ -1,7 +1,7 @@
 <?php
 session_start();
 require_once __DIR__ . '/../../../../config.php';
-require_once __DIR__ . '../../../../../app/Models/Book.php';
+require_once __DIR__ . '/../../../../app/models/Book.php';
 
 // Cek session dan role
 if (!isset($_SESSION['admin_id']) || $_SESSION['admin_role'] !== 'admin') {
@@ -57,16 +57,16 @@ $bukuTahunan = $bookModel->getAll();
                 <?php foreach ($bukuTahunan as $buku) : ?>
                     <div class="component-card">
                         <div class="image-container">
-                        <img src="../../../../public/uploads/cover/<?php echo $buku['cover_path']; ?> " alt="Sampul <?php echo $buku['judul']; ?>">
+                            <img src="../../../public/uploads/<?php echo $buku['cover_path']; ?>" alt="Sampul <?php echo $buku['judul']; ?>">
                         </div>
                         <div class="card-content">
                             <h3><?php echo $buku['judul']; ?></h3>
                             <p><?php echo $buku['penerbit']; ?></p>
-                            <p>Kategori: <?php echo $buku['kategori_name']; ?></p>
+                            <p>Kategori: <?php echo $buku['category_name']; ?></p>
                             <div class="action-buttons">
                                 <a href="edit_book.php?id=<?php echo $buku['id']; ?>" class="btn-edit">Edit</a>
                                 <a href="delete_book.php?id=<?php echo $buku['id']; ?>" class="btn-delete" onclick="return confirm('Apakah Anda yakin ingin menghapus buku ini?')">Delete</a>
-                                <a href="../../../../public/uploads<?php echo $buku['content_path']; ?>" class="lihat-selengkapnya" target="_blank">Lihat Buku</a>
+                                <a href="../../../public/uploads/<?php echo $buku['content_path']; ?>" class="lihat-selengkapnya" target="_blank">Lihat Buku</a>
                             </div>
                         </div>
                     </div>
