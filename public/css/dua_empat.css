@@ -20,47 +20,161 @@ body {
   background-color: #f8f9fa;
 }
 
-  .header {
-    background-color: #E2EEFF; /* Warna latar belakang header */
-    padding: 15px 20px; /* Padding atas-bawah dan kiri-kanan */
-    display: flex; /* Menggunakan flexbox untuk tata letak */
-    align-items: center; /* Membuat item vertikal berada di tengah */
-    justify-content: space-between; /* Memberikan ruang di antara elemen */
-    border-bottom: 1px solid #eee; /* Garis bawah tipis */
+
+/* Header Styles */
+.header {
+    background-color: #E2EEFF;
+    padding: 16px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 2px solid #c0dcfb;
+    flex-wrap: wrap;
+    gap: 32px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
 }
 
 .header-content {
-    display: flex; /* Menggunakan flexbox untuk tata letak konten */
-    align-items: center; /* Membuat item vertikal berada di tengah */
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1px;
+    flex: 1;
+    min-width: 0;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    min-width: 0;
 }
 
 .header-content img {
-    height: 50px; /* Tinggi logo */
-    margin-right: 15px; /* Jarak antara logo dan teks */
+    height: 60px;
+    width: auto;
+    object-fit: contain;
+    transition: transform 0.3s ease;
 }
 
-.header-content p {
-    font-size: 3em; /* Ukuran font teks */
-    font-family : "Jacques Francois", cursive;
-    color: black; /* Warna teks */
-    margin: 0; /* Menghilangkan margin default pada tag <p> */
+.header-content img:hover {
+    transform: scale(1.05);
 }
 
-.Download-button {
-    background-color: #ffffff; /* Warna latar belakang tombol */
-    color: black; /* Warna teks tombol */
-    padding: 10px 15px; /* Padding tombol */
-    border: none; /* Menghilangkan border tombol */
-    border-radius: 30px; /* Membuat sudut tombol menjadi tumpul */
-    cursor: pointer; /* Mengubah kursor menjadi pointer saat dihover */
-    font-size: 1em; /* Ukuran font tombol */
+.header-title {
+    font-size: clamp(28px, 4.5vw, 44px);
+    font-family: "Jacques Francois", cursive;
+    color: #1a365d;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: 500;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 }
 
-.Download-button:hover {
-    background-color:rgb(192, 220, 251); /* Warna latar belakang tombol saat dihover */
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 24px;
 }
 
-.content {
+.download-button {
+    background: linear-gradient(145deg, #ffffff, #f0f7ff);
+    color: #1a365d;
+    padding: 8px 20px;
+    border: 2px solid #c0dcfb;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    white-space: nowrap;
+    transition: all 0.4s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+    
+    overflow: hidden;
+}
+
+.download-button:hover {
+    background: linear-gradient(145deg, #c0dcfb, #e2eeff);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.12);
+    border-color: #90c3fa;
+}
+
+.download-button:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 992px) {
+    .header {
+        padding: 20px 32px;
+    }
+    
+    .header-title {
+        font-size: clamp(24px, 4vw, 36px);
+    }
+}
+
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 24px;
+        padding: 20px;
+    }
+    
+    .header-content {
+        justify-content: space-between;
+        width: 100%;
+    }
+    .header-title {
+        white-space: normal;
+        font-size: 30px;
+        margin-right: 10px;
+    }
+    
+    .header-actions {
+        justify-content: center;
+        width: 100%;
+    }
+    .download-button {
+        width: 40%;
+        text-align: center;
+        font-size: 16px;
+        padding: 12px 24px;
+        align-self: center;
+    }
+    
+}
+
+@media (max-width: 576px) {
+    .header-content {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    
+    .header-title {
+        white-space: normal;
+        font-size: 28px;
+    }
+    
+    .download-button {
+        width: 40%;
+        text-align: center;
+        font-size: 16px;
+        padding: 12px 24px;
+        align-self: center;
+    }
+}  
+
+
+
+
+  .content {    
     display: flex;
     flex-direction: column;
     padding: 20px;
@@ -103,45 +217,137 @@ body {
     aspect-ratio: 16/9; /* Pertahankan rasio 16:9 */
     display: block;
 }
-
-/* Button styles (enhanced) */
-.layout-button {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 15px 10px;
-    background: #ffffff;
-    border: 2px solid #f0f0f0;
+/* Button Card Style - Container menentukan ukuran */
+.button-card, .button-card-osis {
+    display: inline-block;
+    width: 100%; /* Full width of container */
+    aspect-ratio: 4.375 / 1; /* 350/80 = 4.375 ratio (maintains your original proportion) */
     border-radius: 12px;
+    overflow: hidden;
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    cursor: pointer;
-    transition: all 0.3s ease;
-    height: 80px;
-    text-align: center;
-}
-
-.layout-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(0,0,0,0.15);
     background: #f8f8f8;
+    transition: all 0.3s ease;
+    position: relative;
+    border: none;
 }
 
-.layout-button p {
-    margin: 0;
+.button-card-osis {
+    grid-column: span 2; /* Membuat button OSIS mengambil 2 kolom */
+    aspect-ratio: 4.375 / 1; /* Memastikan rasio sama dengan button-card */
+    max-height: 80px;
+}
+
+/* Responsive Grid Container */
+.layout-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 15px;
+    width: 100%;
+}
+
+/* Mobile-First Adjustments */
+@media (max-width: 1199px) {
+    .button-card, .button-card-osis {
+        aspect-ratio: 3.5 / 1;
+    }
+
+    .layout-container {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 10px;
+    }
+
+    .card-label {
+        font-size: 12px;
+        padding: 6px;
+    }
+}
+
+/* Desktop Enhancements */
+@media (min-width: 1200px) {
+    .button-card, .button-card-osis {
+        aspect-ratio: 4 / 1;
+    }
+
+    .layout-container {
+        gap: 20px;
+    }
+}
+
+.card-link {
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+    position: relative;
+}
+
+.image-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    background: #f0f0f0;
+    transition: transform 0.3s ease;
+}
+
+.card-label {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0,0,0,0.7);
+    color: white;
+    padding: 8px;
+    text-align: center;
     font-family: 'Poppins', sans-serif;
     font-size: 14px;
     font-weight: 500;
-    color: #333;
 }
 
-.layout-button i {
-    margin-top: 5px;
-    font-size: 18px;
+/* Hover Effects */
+.button-card:hover, .button-card-osis:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.15);
 }
+
+.button-card:hover .card-image, .button-card-osis:hover .card-image {
+    transform: scale(1.05);
+}
+
+.card-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+    color: white;
+    padding: 16px 12px 8px;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    opacity: 1;
+    transform: translateY(100%);
+    transition: all 0.3s ease;
+}
+
+.button-card:hover .card-overlay, .button-card-osis:hover .card-overlay {
+    transform: translateY(0);
+}
+
 
 /* Horizontal alignment for desktop */
-@media (min-width: 769px) {
+@media (min-width: 900px) {
     .content {
         flex-direction: row; /* Side by side layout */
         align-items: flex-start; /* Align to top */
@@ -166,7 +372,7 @@ body {
 }
 
 /* Mobile layout (buttons below video) */
-@media (max-width: 768px) {
+@media (max-width: 899px) {
     .custom-video-frame {
         padding: 0 10px; /* Add some side padding on mobile */
     }
@@ -187,8 +393,11 @@ body {
     }
 }
 
+
+
+
 .content-book {
-  margin-left: 20px;
+    margin-left: 0px;
 }
 
 .content-book p{
@@ -198,79 +407,80 @@ body {
     display: block;
     margin: 0;
     font-family: 'Poppins', sans-serif;
-  }
+    margin-left: 1.5rem;
+}
 
-  .buku-kelas {
-  display: flex;
-  margin-left: 10px;
-  overflow-x: auto;
-  gap: 1px;
+    .buku-kelas {
+    display: flex;
+    margin-left: 10px;
+    overflow-x: auto;
+    gap: 1px;
 }
 .buku-kelas::-webkit-scrollbar {
-  width: 0; 
+    width: 0; 
 }
- p {
-  font-size: 2em;
-  font-weight: bold;
-  padding: 15px;
-  display: block;
-  margin: 0;
-  font-family: 'Poppins', sans-serif;
+p {
+    font-size: 2em;
+    font-weight: bold;
+    padding: 15px;
+    display: block;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
 }
 
 
 .buku-kelas-card {
-  text-align: left;
-  margin: 0 20px;
+    text-align: left;
+    margin: 0 20px;
 }
 
 .buku-kelas-card img {
-  width: 100%;
-  max-width: 180px;
-  height: auto;
-  margin: 0 auto 15px 0;
-  display: block;
-  align-items: center;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+    width: 100%;
+    max-width: 180px;
+    height: auto;
+    margin: 0 auto 15px 0;
+    display: block;
+    align-items: center;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
 }
 
 .buku-kelas-card h1 {
-  font-size: 1.1em;
-  display: inline-block;
-  font-family: 'Newsreader', serif;
-  text-align: left;
-  margin-bottom: 2px;
-  font-weight: 600;
+    font-size: 1.1em;
+    display: inline-block;
+    font-family: 'Newsreader', serif;
+    text-align: left;
+    margin-bottom: 2px;
+    font-weight: 600;
 }
 
 .buku-kelas-card h2 {
-  font-size: 0.8em;
-  color: #666;
-  margin-bottom: 10px;
-  font-family: 'Poppins', sans-serif;
-  text-align: left;
+    font-size: 0.8em;
+    color: #666;
+    margin-bottom: 10px;
+    font-family: 'Poppins', sans-serif;
+    text-align: left;
 }
 
 .buku-kelas-card button {
-  background-color: #E2EEFF;
-  color: #000000;
-  border: 1px solid #E2EEFF;
-  border-radius: 10px;
-  padding: 8px 15px;
-  cursor: pointer;
-  font-size: 0.8em;
-  display: block;
-  width: 180px;
-  margin: 0;
-  font-family: 'Poppins', sans-serif;
-  letter-spacing: 0.09em;
-  font-weight: 600;
+    background-color: #E2EEFF;
+    color: #000000;
+    border: 1px solid #E2EEFF;
+    border-radius: 10px;
+    padding: 8px 15px;
+    cursor: pointer;
+    font-size: 0.8em;
+    display: block;
+    width: 180px;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    letter-spacing: 0.09em;
+    font-weight: 600;
 }
 
 .buku-kelas-card button:hover {
-  color: white;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
-  background: #000000;
+    color: white;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+    background: #000000;
 }
 
 
