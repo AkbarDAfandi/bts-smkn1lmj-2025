@@ -97,7 +97,6 @@
                     <hr style="height:0.05em; border-width:0; background-color:black; margin-bottom:10px">
                     <button>Lihat selengkapnya</button>
                 </div>
-
                 <div class="buku-kelas-card">
                     <img src="../../../public/assets/buku-perkelas/osis55.png" alt="">
                     <h1>KELAS</h1>
@@ -126,7 +125,6 @@
                     <hr style="height:0.05em; border-width:0; background-color:black; margin-bottom:10px">
                     <button>Lihat selengkapnya</button>
                 </div>
-
                 <div class="buku-kelas-card">
                     <img src="../../../public/assets/buku-perkelas/osis55.png" alt="">
                     <h1>KELAS</h1>

@@ -79,7 +79,9 @@
         // Detect Safari
         const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
 
-        if (isSafari) {
+        const isFirefox = /firefox/i.test(navigator.userAgent);
+
+        if (isSafari || isFirefox) {
             // Remove Swiper entirely for Safari
             document.querySelector('.mySwiper').classList.add('simple-carousel');
 
