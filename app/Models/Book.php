@@ -7,28 +7,53 @@ class Book {
     }
 
     // Create new book
-    public function create($judul, $penerbit, $category_id, $cover_path, $content_path) {
-        $stmt = $this->pdo->prepare("INSERT INTO books (judul, penerbit, category_id, cover_path, content_path) VALUES (?, ?, ?, ?, ?)");
-        return $stmt->execute([$judul, $penerbit, $category_id, $cover_path, $content_path]);
+    public function create($judul, $penerbit, $category_id, $tahun_akademik_id, $cover_path, $content_path) {
+        $stmt = $this->pdo->prepare("
+            INSERT INTO books 
+            (judul, penerbit, category_id, tahun_akademik_id, cover_path, content_path) 
+            VALUES (?, ?, ?, ?, ?, ?)
+        ");
+        return $stmt->execute([$judul, $penerbit, $category_id, $tahun_akademik_id, $cover_path, $content_path]);
+    }
+
+     // Get books by year
+     public function getBooksByAcademicYear($tahun) {
+        $stmt = $this->pdo->prepare("
+            SELECT b.*, c.name AS category_name, t.tahun
+            FROM books b
+            JOIN categories c ON b.category_id = c.id
+            JOIN tahun_akademik t ON b.tahun_akademik_id = t.id
+            WHERE t.tahun = ?
+        ");
+        $stmt->execute([$tahun]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     // Get all books
     public function getAll() {
-        $stmt = $this->pdo->query("SELECT books.*, categories.name as category_name 
-                                 FROM books 
-                                 JOIN categories ON books.category_id = categories.id");
+        $stmt = $this->pdo->query("
+            SELECT b.*, c.name AS category_name, t.tahun
+            FROM books b
+            JOIN categories c ON b.category_id = c.id
+            JOIN tahun_akademik t ON b.tahun_akademik_id = t.id
+        ");
         return $stmt->fetchAll();
     }
 
     // Get single book by ID
     public function getById($id) {
-        $stmt = $this->pdo->prepare("SELECT books.*, categories.name as category_name 
-                                   FROM books 
-                                   JOIN categories ON books.category_id = categories.id 
-                                   WHERE books.id = ?");
+        $stmt = $this->pdo->prepare("
+            SELECT b.*, c.name AS category_name, t.tahun
+            FROM books b
+            JOIN categories c ON b.category_id = c.id
+            JOIN tahun_akademik t ON b.tahun_akademik_id = t.id
+            WHERE b.id = ?
+        ");
         $stmt->execute([$id]);
         return $stmt->fetch();
     }
+
+
 
     // Update book
     // public function update($id, $judul, $penerbit, $kategori_id, $cover_path = null, $content_path = null) {

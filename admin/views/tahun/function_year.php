@@ -26,4 +26,12 @@ function deleteAcademicYear($pdo, $year) {
     $stmt = $pdo->prepare("DELETE FROM tahun_akademik WHERE tahun = ?");
     return $stmt->execute([$year]);
 }
+
+function getYearPagePath($year) {
+    $yearPages = [
+        '2024' => 'duaempat/duaempat.php',
+        '2025' => 'dualima/dualima.php'
+    ];
+    return $yearPages[$year] ?? 'duaempat/duaempat.php';
+}   
 ?>

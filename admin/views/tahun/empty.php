@@ -7,17 +7,17 @@ require_once 'function_year.php';
 if (!isset($_SESSION['admin_id']) || $_SESSION['admin_role'] !== 'admin') {
     $_SESSION['error'] = "Anda tidak memiliki akses ke halaman ini";
     header("Location: " . BASE_URL . "index.php");
-    exit(); 
+    exit();
 }
 
 // Ambil data tahun dari database
 $availableYears = getAvailableYears($pdo);
-sort($availableYears); 
+sort($availableYears);
 
 // Tangani request delete
 if (isset($_GET['delete']) && is_numeric($_GET['delete'])) {
     $yearToDelete = $_GET['delete'];
-    
+
     if (deleteAcademicYear($pdo, $yearToDelete)) {
         $_SESSION['success'] = "Tahun akademik $yearToDelete berhasil dihapus";
         header("Location: empty.php");
@@ -31,6 +31,7 @@ if (isset($_GET['delete']) && is_numeric($_GET['delete'])) {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -39,15 +40,16 @@ if (isset($_GET['delete']) && is_numeric($_GET['delete'])) {
     <link rel="stylesheet" href="../../public/css/sidebar.css">
     <link rel="stylesheet" href="../../public/css/dashboard.css">
     <link rel="stylesheet" href="../../public/css/tahun/empty.css">
-   
+
 </head>
+
 <body>
-<?php include '../../views/layout/sidebar.php' ?>
+    <?php include '../../views/layout/sidebar.php' ?>
     <div class="main-content">
         <div class="header">
             <h2 class="greeting">Select Year</h2>
         </div>
-        
+
         <div class="year-selection-container">
             <div class="title-container">
                 <h2>Please select a year to view student annual books</h2>
@@ -56,7 +58,7 @@ if (isset($_GET['delete']) && is_numeric($_GET['delete'])) {
                     New Year
                 </button>
             </div>
-            
+
             <?php if (isset($_SESSION['error'])): ?>
                 <div class="alert alert-danger">
                     <span><?= $_SESSION['error'] ?></span>
@@ -64,7 +66,7 @@ if (isset($_GET['delete']) && is_numeric($_GET['delete'])) {
                 </div>
                 <?php unset($_SESSION['error']); ?>
             <?php endif; ?>
-            
+
             <?php if (isset($_SESSION['success'])): ?>
                 <div class="alert alert-success">
                     <span><?= $_SESSION['success'] ?></span>
@@ -72,28 +74,29 @@ if (isset($_GET['delete']) && is_numeric($_GET['delete'])) {
                 </div>
                 <?php unset($_SESSION['success']); ?>
             <?php endif; ?>
-            
+
             <div class="year-grid">
                 <?php foreach ($availableYears as $year): ?>
                     <div class="year-card">
                         <button class="delete-btn" onclick="event.stopPropagation(); confirmDelete(<?= $year ?>)">
                             <i class="fas fa-trash-alt"></i>
                         </button>
-                        <div class="year-card-content" onclick="window.location.href='duaempat/duaempat.php?tahun=<?= $year ?>'">
+                        <div class="year-card-content" onclick="window.location.href='<?= getYearPagePath($year) ?>?tahun=<?= $year ?>'">
                             <h3><?= $year ?></h3>
-                        </div>             </div>
+                        </div>
+                    </div>
                 <?php endforeach; ?>
             </div>
         </div>
     </div>
-    
+
     <script>
         function confirmDelete(year) {
             if (confirm(`Apakah Anda yakin ingin menghapus tahun ${year}?`)) {
                 window.location.href = `empty.php?delete=${year}`;
             }
         }
-        
+
         // Auto close alert setelah 5 detik
         document.addEventListener('DOMContentLoaded', function() {
             const alerts = document.querySelectorAll('.alert');
@@ -109,4 +112,5 @@ if (isset($_GET['delete']) && is_numeric($_GET['delete'])) {
         });
     </script>
 </body>
+
 </html>
