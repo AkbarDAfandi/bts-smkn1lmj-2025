@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
     <link rel="stylesheet" href="public/css/style.css">
-    <title>Document</title>
+    <link rel="icon" href="public/assets/img/logosmk.png" type="image/x-icon">
+    <title>Buku Tahunan Siswa </title>
 </head>
 
 <body>

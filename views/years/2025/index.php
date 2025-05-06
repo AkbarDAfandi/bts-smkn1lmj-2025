@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../../public/css/dua_lima.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <title>Document</title>
+    <link rel="icon" href="../../../public/assets/img/logosmk.png" type="image/x-icon">
+    <title>Buku Tahunan Siswa - 2025</title>
 </head>
 <body>
     <header class="header">

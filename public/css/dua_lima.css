@@ -17,11 +17,11 @@
 body {
   min-height: 100vh;
   width: 100%;
-  background-color: #f8f9fa;
+  background-color:rgb(255, 255, 255);
 }
 
   .header {
-    background-color: #E2EEFF; /* Warna latar belakang header */
+    background-color:rgb(215, 231, 253); /* Warna latar belakang header */
     padding: 15px 20px; /* Padding atas-bawah dan kiri-kanan */
     display: flex; /* Menggunakan flexbox untuk tata letak */
     align-items: center; /* Membuat item vertikal berada di tengah */
@@ -47,7 +47,7 @@ body {
 }
 
 .Download-button {
-    background-color: #ffffff; /* Warna latar belakang tombol */
+    background-color:rgba(252, 249, 249, 0.76); /* Warna latar belakang tombol */
     color: black; /* Warna teks tombol */
     padding: 10px 15px; /* Padding tombol */
     border: none; /* Menghilangkan border tombol */
@@ -269,7 +269,7 @@ body {
 
 .buku-kelas-card button:hover {
   color: white;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0);
   background: #000000;
 }
 

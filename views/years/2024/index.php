@@ -6,14 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../../public/css/dua_empat.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <title>Document</title>
+    <link rel="icon" href="../../../public/assets/img/logosmk.png" type="image/x-icon">
+    <title>Buku Tahunan Siswa - 2024</title>
 </head>
 
 <body>
     <header class="header">
         <div class="header-content">
-            <a href="index.php">
-                <img src="../../../public/assets/img/logosmk.png" alt="">
+            <a href="../../../index.php">
+                <img src="../../../public/assets/img/logosmk.png" alt=""> 
                 <p class="header-title">Buku Tahunan Siswa - 2024</p>
             </a>
         </div>
@@ -139,6 +140,55 @@
         <section class="content-book">
             <p>Ekstrakurikuler</p>
             <div class="buku-kelas">
+                <div class="buku-kelas-card">
+                    <img src="../../../public/assets/buku-perkelas/akuntansi3.png" alt="">
+                    <h1>EKSTRAKURIKULER</h1>
+                    <h2>Oleh SMKN 1 Lumajang</h2>
+                    <hr style="height:0.05em; border-width:0; background-color:black; margin-bottom:10px">
+                    <button>Lihat selengkapnya</button>
+                </div>
+                <div class="buku-kelas-card">
+                    <img src="../../../public/assets/buku-perkelas/akuntansi3.png" alt="">
+                    <h1>EKSTRAKURIKULER</h1>
+                    <h2>Oleh SMKN 1 Lumajang</h2>
+                    <hr style="height:0.05em; border-width:0; background-color:black; margin-bottom:10px">
+                    <button>Lihat selengkapnya</button>
+                </div>
+                <div class="buku-kelas-card">
+                    <img src="../../../public/assets/buku-perkelas/akuntansi3.png" alt="">
+                    <h1>EKSTRAKURIKULER</h1>
+                    <h2>Oleh SMKN 1 Lumajang</h2>
+                    <hr style="height:0.05em; border-width:0; background-color:black; margin-bottom:10px">
+                    <button>Lihat selengkapnya</button>
+                </div>
+                <div class="buku-kelas-card">
+                    <img src="../../../public/assets/buku-perkelas/akuntansi3.png" alt="">
+                    <h1>EKSTRAKURIKULER</h1>
+                    <h2>Oleh SMKN 1 Lumajang</h2>
+                    <hr style="height:0.05em; border-width:0; background-color:black; margin-bottom:10px">
+                    <button>Lihat selengkapnya</button>
+                </div>
+                <div class="buku-kelas-card">
+                    <img src="../../../public/assets/buku-perkelas/akuntansi3.png" alt="">
+                    <h1>EKSTRAKURIKULER</h1>
+                    <h2>Oleh SMKN 1 Lumajang</h2>
+                    <hr style="height:0.05em; border-width:0; background-color:black; margin-bottom:10px">
+                    <button>Lihat selengkapnya</button>
+                </div>
+                <div class="buku-kelas-card">
+                    <img src="../../../public/assets/buku-perkelas/akuntansi3.png" alt="">
+                    <h1>EKSTRAKURIKULER</h1>
+                    <h2>Oleh SMKN 1 Lumajang</h2>
+                    <hr style="height:0.05em; border-width:0; background-color:black; margin-bottom:10px">
+                    <button>Lihat selengkapnya</button>
+                </div>
+                <div class="buku-kelas-card">
+                    <img src="../../../public/assets/buku-perkelas/akuntansi3.png" alt="">
+                    <h1>EKSTRAKURIKULER</h1>
+                    <h2>Oleh SMKN 1 Lumajang</h2>
+                    <hr style="height:0.05em; border-width:0; background-color:black; margin-bottom:10px">
+                    <button>Lihat selengkapnya</button>
+                </div>
                 <div class="buku-kelas-card">
                     <img src="../../../public/assets/buku-perkelas/akuntansi3.png" alt="">
                     <h1>EKSTRAKURIKULER</h1>
