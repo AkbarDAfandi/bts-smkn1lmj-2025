@@ -15,17 +15,14 @@
         <span>Tahunan Siswa</span>
 
     </header>
-    <main>
-        <!-- <p>Buku</p>
-        <span>Tahunan Siswa</span> -->
-
+    
         <section class="swiper mySwiper">
             <div class="swiper-wrapper">
 
                 <div class="card swiper-slide">
                     <div class="card_image">
                         <a href="views/years/2024/index.php">
-                            <img src="public/assets/img/dua_empat.jpg" alt="">
+                            <img src="public/assets/img/covertahun2024.png" alt="">
                         </a>
 
                     </div>
@@ -60,7 +57,7 @@
             </div>
         </section>
 
-    </main>
+    
     <footer class="footer">
         <div class="footer-container">
             <div class="title-footer">

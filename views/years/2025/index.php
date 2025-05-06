@@ -11,8 +11,8 @@
     <header class="header">
         <div class="header-content">
             <img src="../../../public/assets/img/logosmk.png" alt="">
-            <p>Buku Tahunan Siswa - 2025</p>
-        </div>
+            <p onclick="window.location.href='index.php'">Buku Tahunan Siswa - 2025</p>
+        </div>        
         <button class="Download-button">Download</button>
     </header>
     <main> 

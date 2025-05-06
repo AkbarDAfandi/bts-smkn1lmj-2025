@@ -12,8 +12,10 @@
 <body>
     <header class="header">
         <div class="header-content">
-            <img src="../../../public/assets/img/logosmk.png" alt="">
-            <p class="header-title">Buku Tahunan Siswa - 2024</p>
+            <a href="index.php">
+                <img src="../../../public/assets/img/logosmk.png" alt="">
+                <p class="header-title">Buku Tahunan Siswa - 2024</p>
+            </a>
         </div>
         <button class="download-button">Download</button>
     </header>
@@ -226,11 +228,11 @@
             <div class="footer-brand">
                 <h2 class="footer-title">BUKU TAHUNAN SISWA SMKN 1 LUMAJANG</h2>
                 <div class="footer-social">
-                    <a href="https://www.instagram.com/vendetta.666" aria-label="Instagram"><i class='bx bxl-instagram'></i></a>
-                    <a href="https://www.tiktok.com/@vendettaa.666?is_from_webapp=1&sender_device=pc" aria-label="TikTok"><i class='bx bxl-tiktok'></i></a>
-                    <a href="https://github.com/Vendetta137" aria-label="GitHub"><i class='bx bxl-github'></i></a>
-                    <a href="https://discordapp.com/users/770242596945395712" aria-label="Discord"><i class='bx bxl-discord'></i></a>
-                    <a href="https://open.spotify.com/playlist/6XJdA5sPm9lCrvqR5daL6U?si=c950f4443d3d4f87" aria-label="Spotify"><i class='bx bxl-spotify'></i></a>
+                    <a href="https://www.instagram.com/smkn1lumajang?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" aria-label="Instagram"><i class='bx bxl-instagram'></i></a>
+                    <a href="https://web.facebook.com/people/SMKN-1-Lumajang/100071251050566/" aria-label="Facebook"><i class='bx bxl-facebook'></i></a>
+                    <a href="https://www.tiktok.com/@smkn1lumajang?_t=8knQnkBiAXB&_r=1" aria-label="Tiktok"><i class='bx bxl-tiktok'></i></a>
+                    <a href="https://www.youtube.com/@smkn1lumajangtv797" aria-label="Youtube"><i class='bx bxl-youtube'></i></a>
+                    <a href="https://t.me/info_ppdb_smkn1lumajang_2024" aria-label="Spotify"><i class='bx bxl-telegram'></i></a>
                 </div>
             </div>
 
