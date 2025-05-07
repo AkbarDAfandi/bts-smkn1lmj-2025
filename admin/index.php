@@ -1,13 +1,14 @@
 <?php
 session_start();
-require_once '../config.php';
+require_once __DIR__ . '/../config.php';
 
-// Jika sudah login, redirect ke dashboard
+
 if (isset($_SESSION['admin_id'])) {
-    header("Location: " . BASE_URL . "views/dashboard.php");
-    exit();
+ header("Location: " . BASE_URL . "admin/views/dashboard.php");
+ exit();
 }
-?>
+
+?> 
 
 
 <!DOCTYPE html>
@@ -23,7 +24,7 @@ if (isset($_SESSION['admin_id'])) {
 <body>
     <div class="login-container">
         <div class="right-side">
-            <div class="admin-text">Admin Panel</div>
+            <div class="admin-text"></div>
             <h2>Sign In</h2>
             <p>Enter your credentials to access your dashboard.</p>
 

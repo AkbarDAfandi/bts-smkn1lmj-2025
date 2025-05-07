@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $_SESSION['admin_role'] = $user['role'];  // Simpan role di session
                 $_SESSION['logged_in'] = true;
                 
-                header("Location: " . BASE_URL . "/views/dashboard.php");
+                header("Location: " . BASE_URL . "admin/views/dashboard.php");
                 exit();
             } else {
                 $_SESSION['error'] = "Username atau password salah";

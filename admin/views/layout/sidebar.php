@@ -19,7 +19,7 @@ if (!isset($_SESSION['admin_id']) || $_SESSION['admin_role'] !== 'admin') {
     <p class="sidebar-category">Main</p>
     <ul class="sidebar-menu">
         <li class="<?= $current_page == 'dashboard.php' ? 'active' : '' ?>">
-            <a href="<?= BASE_URL ?>/views/dashboard.php" class="nav-link">
+            <a href="<?= BASE_URL ?>admin/views/dashboard.php" class="nav-link">
                 <i class="fas fa-home"></i><span>Dashboard</span>
             </a>
         </li>
@@ -29,13 +29,13 @@ if (!isset($_SESSION['admin_id']) || $_SESSION['admin_role'] !== 'admin') {
     <p class="sidebar-category">Content</p>
     <ul class="sidebar-menu">
         <li class="<?= $current_page == 'category.php' ? 'active' : '' ?>">
-            <a href="<?= BASE_URL ?>/views/category/category.php" class="nav-link">
+            <a href="<?= BASE_URL ?>admin/views/category/category.php" class="nav-link">
                 <i class="fas fa-list-alt"></i>
                 <span>Category</span>
             </a>
         </li>
         <li class="<?= $current_page == 'empty.php' ? 'active' : '' ?>">
-            <a href="<?= BASE_URL ?>/views/tahun/empty.php" class="nav-link">
+            <a href="<?= BASE_URL ?>admin/views/tahun/empty.php" class="nav-link">
                 <i class="fas fa-calendar"></i>
                 <span>Year Selection</span>
             </a>
