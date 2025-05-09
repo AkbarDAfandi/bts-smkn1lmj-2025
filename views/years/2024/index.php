@@ -1,3 +1,8 @@
+
+<?php
+require_once __DIR__ . '/../../../config.php';
+session_start()
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,6 +13,7 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="icon" href="../../../public/assets/img/logosmk.png" type="image/x-icon">
     <title>Buku Tahunan Siswa - 2024</title>
+    <link rel="stylesheet" href="../../../admin/public/css/style.css">
 </head>
 
 <body>
@@ -18,7 +24,9 @@
                 <p class="header-title">Buku Tahunan Siswa - 2024</p>
             </a>
         </div>
-        <button class="download-button">Download</button>
+        <a href="<?php echo BASE_URL; ?>views/auth/login.php">
+    <button class="download-button">Download</button>
+</a>
     </header>
     <main>
         <section class="content">
