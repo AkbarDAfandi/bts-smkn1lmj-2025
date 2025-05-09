@@ -44,11 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 header("Location: " . BASE_URL . "index.php");
                 exit();
             }
-        } else {
-            $_SESSION['error'] = "Username atau password salah";
-            header("Location: " . BASE_URL . "index.php");
-            exit();
-        }
+        } 
     } catch (PDOException $e) {
         $_SESSION['error'] = "Terjadi kesalahan sistem. Silakan coba lagi nanti.";
         error_log("Database error: " . $e->getMessage());
