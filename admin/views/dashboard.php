@@ -8,13 +8,35 @@ if (!isset($_SESSION['admin_id']) || $_SESSION['admin_role'] !== 'admin') {
     header("Location: " . BASE_URL . "admin/index.php");
     exit();
 }
+
+// Get statistics from database
+try {
+    // Total books count
+    $stmt = $pdo->query("SELECT COUNT(*) as total_books FROM books");
+    $totalBooks = $stmt->fetch(PDO::FETCH_ASSOC)['total_books'];
+    
+    // Total categories count
+    $stmt = $pdo->query("SELECT COUNT(*) as total_categories FROM categories");
+    $totalCategories = $stmt->fetch(PDO::FETCH_ASSOC)['total_categories'];
+    
+    // Total academic years count
+    $stmt = $pdo->query("SELECT COUNT(*) as total_years FROM tahun_akademik");
+    $totalYears = $stmt->fetch(PDO::FETCH_ASSOC)['total_years'];
+    
+} catch (PDOException $e) {
+    // Handle error if needed
+    $totalBooks = 0;
+    $totalCategories = 0;
+    $totalYears = 0;
+    error_log("Database error: " . $e->getMessage());
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modern Admin Dashboard</title>
+    <title>Admin Dashboard</title>
     <link rel="stylesheet" href="../public/css/all.min.css">
     <link rel="stylesheet" href="../public/css/sidebar.css"> 
     <link rel="stylesheet" href="../public/css/dashboard.css">
@@ -49,13 +71,11 @@ if (!isset($_SESSION['admin_id']) || $_SESSION['admin_role'] !== 'admin') {
         font-weight: 700;
         src: url('../public/fonts/poppins/Poppins-Bold.ttf') format('truetype');
     }
-
-    
     
     body {
         font-family: 'Poppins', sans-serif;
     }
-</style>
+    </style>
 </head>
 <body>
 
@@ -63,7 +83,7 @@ if (!isset($_SESSION['admin_id']) || $_SESSION['admin_role'] !== 'admin') {
     
     <div class="main-content">
         <div class="header">
-            <h2 class="greeting">Good Morning, Jason!</h2>
+            <h2 class="greeting">Selamat Datang, <?= htmlspecialchars($_SESSION['admin_name'] ?? 'Admin') ?>!</h2>
             <div class="user-info">
                 <div class="search-bar">
                     <i class="fas fa-search"></i>
@@ -77,207 +97,151 @@ if (!isset($_SESSION['admin_id']) || $_SESSION['admin_role'] !== 'admin') {
         <div class="stats-container">
             <div class="stat-card">
                 <div class="stat-icon blue">
-                    <i class="fas fa-users"></i>
+                    <i class="fas fa-book"></i>
                 </div>
                 <div class="stat-info">
-                    <h3>236</h3>
-                    <p>New Clients</p>
+                    <h3><?= $totalBooks ?></h3>
+                    <p>Total Buku</p>
                 </div>
             </div>
             
             <div class="stat-card">
                 <div class="stat-icon green">
-                    <i class="fas fa-book"></i>
+                    <i class="fas fa-tags"></i>
                 </div>
                 <div class="stat-info">
-                    <h3>$18,306</h3>
-                    <p>Earnings of Month</p>
+                    <h3><?= $totalCategories ?></h3>
+                    <p>Kategori Buku</p>
                 </div>
             </div>
             
             <div class="stat-card">
-
-<div class="stat-icon orange">
-                    <i class="fas fa-chart-line"></i>
+                <div class="stat-icon orange">
+                    <i class="fas fa-calendar-alt"></i>
                 </div>
                 <div class="stat-info">
-                    <h3>13.5%</h3>
-                    <p>Growth Rate</p>
+                    <h3><?= $totalYears ?></h3>
+                    <p>Tahun Akademik</p>
                 </div>
             </div>
             
             <div class="stat-card">
                 <div class="stat-icon red">
-                    <i class="fas fa-project-diagram"></i>
+                    <i class="fas fa-chart-line"></i>
                 </div>
                 <div class="stat-info">
-                    <h3>1,538</h3>
-                    <p>New Projects</p>
+                    <h3><?= $totalBooks > 0 ? round($totalBooks/$totalCategories) : 0 ?></h3>
+                    <p>Rata-rata Buku per Kategori</p>
                 </div>
             </div>
         </div>
         
-        
         <div class="chart">
             <div class="chart-header">
-                <h3>Earnings by Location</h3>
-                <div class="chart-actions">
-                    <button class="active">All Regions</button>
-                    <button>Top 5</button>
-                </div>
+                
             </div>
             <div class="location-chart">
-                <div>
-                    <div class="progress-item">
-                        <div class="progress-info">
-                            <span>United States</span>
-                            <span>65%</span>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress-fill blue"></div>
-                        </div>
-                    </div>
-                    
-                    <div class="progress-item">
-                        <div class="progress-info">
-                            <span>United Kingdom</span>
-                            <span>45%</span>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress-fill green"></div>
-                        </div>
-                    </div>
-                    
-                    <div class="progress-item">
-                        <div class="progress-info">
-                            <span>Australia</span>
-                            <span>30%</span>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress-fill orange"></div>
-                        </div>
-                    </div>
-                </div>
+                <?php
+                // Get book distribution by category
+                $categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 
-                <div>
-                    <div class="progress-item">
-                        <div class="progress-info">
-                            <span>Germany</span>
-                            <span>25%</span>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress-fill purple"></div>
-                        </div>
+                $colors = ['blue', 'green', 'orange', 'purple', 'red'];
+                $i = 0;
+                foreach ($categories as $category): 
+                    $percentage = $totalBooks > 0 ? round(($category['book_count'] / $totalBooks) * 100) : 0;
+                ?>
+                <div class="progress-item">
+                    <div class="progress-info">
+                        <span><?= htmlspecialchars($category['name']) ?></span>
+                        <span><?= $category['book_count'] ?></span>
                     </div>
-                    
-                    <div class="progress-item">
-                        <div class="progress-info">
-                            <span>Canada</span>
-                            <span>20%</span>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress-fill blue" style="width: 20%"></div>
-                        </div>
-                    </div>
-                    
-                    <div class="progress-item">
-                        <div class="progress-info">
-                            <span>Other Countries</span>
-                            <span>15%</span>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress-fill green" style="width: 15%"></div>
-                        </div>
-                    </div>
+                  
                 </div>
+                <?php 
+                   
+                endforeach; 
+                ?>
             </div>
         </div>
         
         <div class="chart-container">
             <div class="chart">
                 <div class="chart-header">
-                    <h3>Recent Activities</h3>
-                    <div class="chart-actions">
-                        <button class="active">All</button>
-                        <button>Today</button>
-                    </div>
+                    <h3>Buku Terbaru</h3>
                 </div>
-                <div class="activities">
-                    <div class="activity-item">
-                        <div class="activity-icon blue">
-                            <i class="fas fa-user-plus"></i>
-                        </div>
-                        <div class="activity-info">
-                            <h4>New client registered</h4>
-                            <p>Client #2458 has been added</p>
-                            <span class="activity-time">2 min ago</span>
-                        </div>
-                    </div>
+                <div class="recent-books">
+                    <?php
+                    // Get recent books
+                    $stmt = $pdo->query("
+                        SELECT b.judul, c.name as category_name, b.created_at 
+                        FROM books b
+                        JOIN categories c ON b.category_id = c.id
+                        ORDER BY b.created_at DESC 
+                        LIMIT 5
+                    ");
+                    $books = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     
-                    <div class="activity-item">
-                        <div class="activity-icon green">
-                            <i class="fas fa-dollar-sign"></i>
+                    if (empty($books)) {
+                        echo "<p>Belum ada buku yang ditambahkan</p>";
+                    } else {
+                        foreach ($books as $book): 
+                    ?>
+                    <div class="book-item">
+                        <div class="book-icon">
+                            <i class="fas fa-book-open"></i>
                         </div>
-                        <div class="activity-info">
-                            <h4>New payment received</h4>
-                            <p>$2,500 from Project X</p>
-                            <span class="activity-time">1 hour ago</span>
-                        </div>
-                    </div>
-                    
-                    <div class="activity-item">
-                        <div class="activity-icon orange">
-                            <i class="fas fa-exclamation-triangle"></i>
-                        </div>
-                        <div class="activity-info">
-                            <h4>Server alert</h4>
-                            <p>Server load at 92%</p>
-                            <span class="activity-time">3 hours ago</span>
+                        <div class="book-info">
+                            <h4><?= htmlspecialchars($book['judul']) ?></h4>
+                            <p>Kategori: <?= htmlspecialchars($book['category_name']) ?></p>
+                            <span class="book-date">
+                                Ditambahkan: <?= date('d M Y', strtotime($book['created_at'])) ?>
+                            </span>
                         </div>
                     </div>
+                    <?php 
+                        endforeach;
+                    }
+                    ?>
                 </div>
             </div>
             
             <div class="chart">
                 <div class="chart-header">
-                    <h3>Upcoming Tasks</h3>
-                    <div class="chart-actions">
-                        <button class="active">All</button>
-                        <button>Priority</button>
-                    </div>
+                    <h3>Buku per Tahun Akademik</h3>
                 </div>
-                <div class="tasks">
-                    <div class="task-item">
-                        <input type="checkbox" id="task1">
-                        <label for="task1">Client meeting with John</label>
-                        <span class="task-date">Today, 2:00 PM</span>
-                    </div>
+                <div class="year-stats">
+                    <?php
+                    // Get books by academic year
+                    $stmt = $pdo->query("
+                        SELECT t.tahun, COUNT(b.id) as book_count 
+                        FROM tahun_akademik t
+                        LEFT JOIN books b ON t.id = b.tahun_akademik_id 
+                        GROUP BY t.id 
+                        ORDER BY t.tahun DESC
+                    ");
+                    $years = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     
-                    <div class="task-item">
-                        <input type="checkbox" id="task2">
-                        <label for="task2">Project proposal deadline</label>
-                        <span class="task-date">Tomorrow, 10:00 AM</span>
+                    if (empty($years)) {
+                        echo "<p>Belum ada data tahun akademik</p>";
+                    } else {
+                        foreach ($years as $year): 
+                    ?>
+                    <div class="year-item">
+                        <div class="year-info">
+                            <span>Tahun <?= htmlspecialchars($year['tahun']) ?></span>
+                            <span><?= $year['book_count'] ?> buku</span>
+                        </div>
+                        <div class="year-bar">
+                            <div class="year-fill" style="width: <?= $totalBooks > 0 ? round(($year['book_count'] / $totalBooks) * 100) : 0 ?>%"></div>
+                        </div>
                     </div>
-                    
-                    <div class="task-item">
-                        <input type="checkbox" id="task3">
-                        <label for="task3">Team review meeting</label>
-                        <span class="task-date">May 15, 9:30 AM</span>
-                    </div>
-                    
-                    <div class="task-item">
-                        <input type="checkbox" id="task4">
-                        <label for="task4">Update documentation</label>
-                        <span class="task-date">May 18, 11:00 AM</span>
-                    </div>
+                    <?php 
+                        endforeach;
+                    }
+                    ?>
                 </div>
             </div>
         </div>
     </div>
-
-
-  
-
-    <!-- <script src="assets/js/sidebar.js"></script> -->
 </body>
 </html>
