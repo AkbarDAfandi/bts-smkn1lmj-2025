@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: May 10, 2025 at 10:12 AM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Host: localhost:3306
+-- Generation Time: May 13, 2025 at 08:35 AM
+-- Server version: 8.0.30
+-- PHP Version: 7.4.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -28,15 +28,15 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `books` (
-  `id` int(11) NOT NULL,
-  `judul` varchar(255) NOT NULL,
-  `penerbit` varchar(255) DEFAULT NULL,
-  `category_id` int(11) NOT NULL,
-  `cover_path` varchar(255) DEFAULT NULL,
-  `content_path` varchar(255) DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `tahun_akademik_id` int(11) DEFAULT NULL
+  `id` int NOT NULL,
+  `judul` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `penerbit` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `category_id` int NOT NULL,
+  `cover_path` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `content_path` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `tahun_akademik_id` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -44,9 +44,13 @@ CREATE TABLE `books` (
 --
 
 INSERT INTO `books` (`id`, `judul`, `penerbit`, `category_id`, `cover_path`, `content_path`, `created_at`, `updated_at`, `tahun_akademik_id`) VALUES
-(1, 'Akuntansi dua', 'SMKN 1 LUMAJANG', 1, 'cover/cover_681efe333ef83.jpg', 'content/content_681efe333f572.pdf', '2025-05-10 07:20:19', '2025-05-10 07:36:44', 1),
+(1, 'Akuntansi 2', 'SMKN 1 LUMAJANG', 1, 'cover/cover_681efe333ef83.jpg', 'content/content_681efe333f572.pdf', '2025-05-10 07:20:19', '2025-05-13 05:06:53', 1),
 (2, 'Pembina Kesiswaan', 'SMKN 1 LUMAJANG', 2, 'cover/cover_681efe811377f.jpg', 'content/content_681efe8115091.pdf', '2025-05-10 07:21:37', '2025-05-10 07:21:37', 1),
-(3, 'Jurnalistik', 'SMKN 1 LUMAJANG', 3, 'cover/cover_681eff5adc09a.jpg', 'content/content_681eff5add66f.pdf', '2025-05-10 07:25:14', '2025-05-10 07:25:14', 1);
+(3, 'Jurnalistik', 'SMKN 1 LUMAJANG', 3, 'cover/cover_681eff5adc09a.jpg', 'content/content_681eff5add66f.pdf', '2025-05-10 07:25:14', '2025-05-10 07:25:14', 1),
+(4, 'Foto Angkatan', 'SMKN 1 LUMAJANG', 4, 'cover/cover_682032fd0624a.png', 'content/content_682032fd08df2.pdf', '2025-05-11 05:17:49', '2025-05-11 05:17:49', 1),
+(5, 'KOMITE SMK', 'SMKN 1 LUMAJANG', 2, 'cover/cover_682033ccc23b5.png', 'content/content_682033ccc5f99.pdf', '2025-05-11 05:21:16', '2025-05-11 05:21:16', 1),
+(6, 'OSIS GEN 54', 'SMKN 1 LUMAJANG', 5, 'cover/cover_6822ced2f4060.png', 'content/content_6822ced30809d.pdf', '2025-05-13 04:47:15', '2025-05-13 04:47:15', 1),
+(7, 'OSIS GEN 55', 'SMKN 1 LUMAJANG', 5, 'cover/cover_6822d1803a105.png', 'content/content_6822d1803c3bf.pdf', '2025-05-13 04:58:40', '2025-05-13 04:58:40', 1);
 
 -- --------------------------------------------------------
 
@@ -55,10 +59,10 @@ INSERT INTO `books` (`id`, `judul`, `penerbit`, `category_id`, `cover_path`, `co
 --
 
 CREATE TABLE `categories` (
-  `id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `created_at` timestamp NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `id` int NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -68,7 +72,9 @@ CREATE TABLE `categories` (
 INSERT INTO `categories` (`id`, `name`, `created_at`, `updated_at`) VALUES
 (1, 'Siswa dan Siswi', '2025-05-10 06:00:15', '2025-05-10 06:00:15'),
 (2, 'Guru', '2025-05-10 06:30:43', '2025-05-10 06:30:43'),
-(3, 'Ekstrakurikuler', '2025-05-10 07:23:27', '2025-05-10 07:23:27');
+(3, 'Ekstrakurikuler', '2025-05-10 07:23:27', '2025-05-10 07:23:27'),
+(4, 'Lain Lain', '2025-05-11 05:16:20', '2025-05-11 05:16:20'),
+(5, 'Osis', '2025-05-13 04:36:10', '2025-05-13 04:36:10');
 
 -- --------------------------------------------------------
 
@@ -77,9 +83,9 @@ INSERT INTO `categories` (`id`, `name`, `created_at`, `updated_at`) VALUES
 --
 
 CREATE TABLE `tahun_akademik` (
-  `id` int(11) NOT NULL,
-  `tahun` int(11) NOT NULL,
-  `created_at` timestamp NULL DEFAULT current_timestamp()
+  `id` int NOT NULL,
+  `tahun` int NOT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -97,12 +103,12 @@ INSERT INTO `tahun_akademik` (`id`, `tahun`, `created_at`) VALUES
 --
 
 CREATE TABLE `users` (
-  `id` int(11) NOT NULL,
-  `username` varchar(50) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `role` enum('admin','user','moderator','guest') DEFAULT 'user',
-  `created_at` timestamp NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `id` int NOT NULL,
+  `username` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `password` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `role` enum('admin','user','moderator','guest') COLLATE utf8mb4_general_ci DEFAULT 'user',
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -153,25 +159,25 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `books`
 --
 ALTER TABLE `books`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `tahun_akademik`
 --
 ALTER TABLE `tahun_akademik`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
