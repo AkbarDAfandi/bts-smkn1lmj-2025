@@ -135,9 +135,12 @@ body {
         font-size: 2rem;
     }
     .download-button {
-        width: 60%;
+        width: 70%;
         margin: 0 auto;
         padding: 0.8rem 1.5rem;
+        font-size: 1rem;
+        margin: 0 auto;
+        display: block;
     }
 }
 
@@ -149,8 +152,11 @@ body {
         font-size: 1.75rem;
     }
     .download-button {
-        width: 80%;
-        font-size: 0.9rem;
+        width: 60%;
+        font-size: 1rem;
+        padding: 0.8rem 1.5rem;
+        margin: 0 auto;
+        display: block;
     }
 }
 /* HEADER ENDS */
@@ -164,14 +170,82 @@ body {
     max-width: 1200px;
     margin: 0 auto;
 }
-/* Video frame adjustments */
+/* Video Container Enhancements */
+.video-container {
+    position: relative;
+    width: 100%;
+    max-width: 560px;
+    margin: 0 auto 30px;
+}
+
 .custom-video-frame {
     position: relative;
     width: 100%;
-    max-width: 560px; /* Maksimal lebar sesuai ukuran asli iframe */
-    margin: 0 auto;
+    overflow: hidden;
 }
-/* Frame PNG Overlay */
+
+.video-carousel {
+    display: flex;
+    transition: transform 0.5s ease;
+    width: 100%;
+}
+
+.video-slide {
+    min-width: 100%;
+    position: relative;
+    display: none;
+}
+
+.video-slide.active {
+    display: block;
+}
+
+.youtube-video {
+    position: relative;
+    z-index: 2;
+    padding: 15px;
+    width: 100%;
+}
+
+.youtube-video iframe {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16/9;
+    display: block;
+}
+
+.carousel-controls {
+    position: absolute;
+    top: 50%;
+    margin-left :20px;
+    margin-right :20px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    z-index: 4;
+    transform: translateY(-50%);
+    
+}
+
+.carousel-prev, .carousel-next {
+    color: black;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 15px;
+    background-color: rgba(255, 255, 255, 0.5);
+    z-index: 5;
+}
+
+
+/* Frame PNG Overlay (tetap sama) */
 .frame-image {
     position: absolute;
     top: 0;
@@ -181,20 +255,6 @@ body {
     z-index: 3;
     pointer-events: none;
     object-fit: contain;
-}
-/* Video Wrapper */
-.youtube-video {
-    position: relative;
-    z-index: 2;
-    padding: 15px; /* Sesuaikan dengan border image */
-    width: 100%;
-}
-/* Responsive Video Iframe */
-.youtube-video iframe {
-    width: 100%;
-    height: auto; /* Ubah dari fixed height ke auto */
-    aspect-ratio: 16/9; /* Pertahankan rasio 16:9 */
-    display: block;
 }
 /* Button Card Style - Container menentukan ukuran */
 .button-card, .button-card-osis {
