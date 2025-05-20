@@ -7,7 +7,7 @@ define('BASE_URL', 'http://' . $_SERVER['HTTP_HOST'] . '/bts-smkn1lmj-2025/');
 
 
 $host = 'localhost';
-$dbname = 'bts-coba';
+$dbname = 'buku-tahunan-siswa';
 $username = 'root';
 $password = '';
 $charset = 'utf8mb4';
