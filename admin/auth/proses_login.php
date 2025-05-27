@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Validasi input
     if (empty($username) || empty($password)) {
         $_SESSION['error'] = "Username dan password harus diisi";
-        header("Location: " . BASE_URL . "index.php");
+        header("Location: index.php");
         exit();
     }
 
@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 // Cek role user
                 if ($user['role'] !== 'admin') {
                     $_SESSION['error'] = "Anda tidak memiliki akses sebagai admin";
-                    header("Location: " . BASE_URL . "index.php");
+                    header("Location: index.php");
                     exit();
                 }
                 
@@ -37,21 +37,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $_SESSION['admin_role'] = $user['role'];  // Simpan role di session
                 $_SESSION['logged_in'] = true;
                 
-                header("Location: " . BASE_URL . "admin/views/dashboard.php");
+                header("Location: /bts-smkn1lmj-2025/admin/views/dashboard.php");
                 exit();
             } else {
                 $_SESSION['error'] = "Username atau password salah";
-                header("Location: " . BASE_URL . "index.php");
+                header("Location: index.php");
                 exit();
             }
         } 
     } catch (PDOException $e) {
         $_SESSION['error'] = "Terjadi kesalahan sistem. Silakan coba lagi nanti.";
         error_log("Database error: " . $e->getMessage());
-        header("Location: " . BASE_URL . "index.php");
+        header("Location: index.php");
         exit();
     }
 } else {
-    header("Location: " . BASE_URL . "index.php");
+    header("Location: index.php");
     exit();
 }

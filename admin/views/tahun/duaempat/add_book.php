@@ -7,7 +7,7 @@ require_once __DIR__ . '/../function_year.php';
 // Check admin session and role
 if (!isset($_SESSION['admin_id']) || $_SESSION['admin_role'] !== 'admin') {
     $_SESSION['error'] = "Anda tidak memiliki akses ke halaman ini";
-    header("Location: " . BASE_URL . "index.php");
+    header("Location: index.php");
     exit();
 }
 
@@ -56,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Simpan ke database
     if ($bookModel->create($judul, $penerbit, $kategori_id, $tahun_akademik_id, $coverPath, $contentPath)) {
         $_SESSION['success'] = "Buku berhasil ditambahkan";
-        header("Location: " . BASE_URL . "admin/views/tahun/duaempat/duaempat.php?tahun=2024");
+        header("Location: duaempat.php?tahun=2024");
         exit();
     } else {
         $_SESSION['error'] = "Gagal menambahkan buku";
@@ -86,13 +86,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <h2 class="greeting">
                 Tambah Buku Baru
             </h2>
-            <div class="user-info">
-                <div class="search-bar">
-                    <i class="fas fa-search"></i>
-                    <input type="text" placeholder="Search...">
-                </div>
-                <i class="far fa-bell"></i>
-            </div>
+    
         </div>
 
         <div class="form-container">

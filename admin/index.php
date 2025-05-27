@@ -4,7 +4,7 @@ require_once __DIR__ . '/../config.php';
 
 
 if (isset($_SESSION['admin_id'])) {
- header("Location: " . BASE_URL . "admin/views/dashboard.php");
+ header("Location: /bts-smkn1lmj-2025/admin/views/dashboard.php");
  exit();
 }
 

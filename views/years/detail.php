@@ -3,7 +3,7 @@ require_once __DIR__ . '/../../config.php';
 session_start();
 
 if (!isset($_GET['id']) || !isset($_GET['year'])) {
-    header('Location: ' . BASE_URL);
+    header('Location: /bts-smkn1lmj-2025/');
     exit;
 }
 
@@ -28,7 +28,7 @@ try {
     $book = $stmt->fetch();
     
     if (!$book) {
-        header('Location: ' . BASE_URL . 'views/years/' . $year . '/');
+        header('Location: /bts-smkn1lmj-2025/views/years/' . $year . '/');
         exit;
     }
 
@@ -50,7 +50,7 @@ if (isset($_GET['download'])) {
         }
     }
     // Jika file tidak ditemukan, redirect kembali
-    header('Location: ' . BASE_URL . 'views/years/' . $year . '/');
+    header('Location: /bts-smkn1lmj-2025/views/years/' . $year . '/');
     exit;
 }
 
@@ -64,15 +64,15 @@ $isTeacherBook = ($book['category_id'] == 2);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title><?= htmlspecialchars($book['judul']) ?> - Buku Tahunan <?= $year ?></title>
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="../../public/css/detail.css">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/bts-smkn1lmj-2025/public/css/detail.css">
 </head>
 <body>
     <!-- HEADER -->
     <header class="header">
         <div class="header-content">
-            <a href="<?= BASE_URL ?>index.php">
-                <img src="<?= BASE_URL ?>public/assets/img/logosmk.png" alt="Logo SMK"> 
+            <a href="/bts-smkn1lmj-2025/">
+                <img src="/bts-smkn1lmj-2025/public/assets/img/logosmk.png" alt="Logo SMK"> 
                 <p class="header-title">Buku Tahunan Siswa - <?= $year ?></p>
             </a>
         </div>
@@ -81,10 +81,10 @@ $isTeacherBook = ($book['category_id'] == 2);
      <!-- MAIN CONTENT -->
     <main class="container">
         <div class="book-header">
-            <img src="<?= BASE_URL ?>admin/public/uploads/<?= $book['cover_path'] ?>" 
+            <img src="/bts-smkn1lmj-2025/admin/public/uploads/<?= $book['cover_path'] ?>" 
                  alt="<?= htmlspecialchars($book['judul']) ?>" 
                  class="book-cover"
-                 onerror="this.src='<?= BASE_URL ?>public/assets/img/default-book.png'">
+                 onerror="this.src='/bts-smkn1lmj-2025/public/assets/img/default-book.png'">
             
             <div>
                 <h1>
@@ -110,7 +110,7 @@ $isTeacherBook = ($book['category_id'] == 2);
 
         <?php if (!empty($book['content_path'])): ?>
             <div class="pdf-viewer-container">
-                <iframe src="<?= BASE_URL ?>admin/public/uploads/<?= $book['content_path'] ?>#toolbar=0" 
+                <iframe src="/bts-smkn1lmj-2025/admin/public/uploads/<?= $book['content_path'] ?>#toolbar=0" 
                         class="pdf-viewer">
                     Browser Anda tidak mendukung PDF. Silakan download <a href="?id=<?= $_GET['id'] ?>&year=<?= $year ?>&download=1">di sini</a>.
                 </iframe>
@@ -121,7 +121,7 @@ $isTeacherBook = ($book['category_id'] == 2);
             </div>
         <?php endif; ?>
         
-        <a href="<?= BASE_URL ?>views/years/<?= $year ?>/" class="back-btn">
+        <a href="/bts-smkn1lmj-2025/views/years/<?= $year ?>/" class="back-btn">
             <i class='bx bx-arrow-back'></i> Kembali ke Katalog <?= $year ?>
         </a>
     </main>

@@ -6,14 +6,14 @@ require_once __DIR__ . '/../../../../app/models/Book.php';
 // Check admin session
 if (!isset($_SESSION['admin_id']) || $_SESSION['admin_role'] !== 'admin') {
     $_SESSION['error'] = "Anda tidak memiliki akses ke halaman ini";
-    header("Location: " . BASE_URL);
+    header("Location: ../../../index.php" );
     exit();
 }
 
 // Check if ID is provided
 if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
     $_SESSION['error'] = "ID buku tidak valid";
-    header("Location: " . BASE_URL . "admin/views/tahun/duaempat/duaempat.php");
+    header("Location: duaempat.php");
     exit();
 }
 
@@ -32,6 +32,6 @@ try {
 }
 
 // Redirect back to the books list
-header("Location: " . BASE_URL . "admin/views/tahun/duaempat/duaempat.php");
+header("Location: " . dirname($_SERVER['PHP_SELF']) . "/duaempat.php");
 exit();
 ?>

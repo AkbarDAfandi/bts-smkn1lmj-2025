@@ -5,7 +5,7 @@ require_once __DIR__ . '/../../config.php';
 // Cek apakah user sudah login dan memiliki role admin
 if (!isset($_SESSION['admin_id']) || $_SESSION['admin_role'] !== 'admin') {
     $_SESSION['error'] = "Anda tidak memiliki akses ke halaman ini";
-    header("Location: " . BASE_URL . "admin/index.php");
+    header("Location: admin/index.php");
     exit();
 }
 
@@ -89,14 +89,6 @@ try {
     <div class="main-content">
         <div class="header">
             <h2 class="greeting">Selamat Datang, <?= htmlspecialchars($_SESSION['admin_name'] ?? 'Admin') ?>!</h2>
-            <div class="user-info">
-                <div class="search-bar">
-                    <i class="fas fa-search"></i>
-                    <input type="text" placeholder="Search...">
-                </div>
-                <i class="far fa-bell"></i>
-                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User Profile">
-            </div>
         </div>
 
         <div class="stats-container">
@@ -130,15 +122,6 @@ try {
                 </div>
             </div>
 
-            <div class="stat-card">
-                <div class="stat-icon red">
-                    <i class="fas fa-chart-line"></i>
-                </div>
-                <div class="stat-info">
-                    <h3><?= $totalBooks > 0 ? round($totalBooks / $totalCategories) : 0 ?></h3>
-                    <p>Rata-rata Buku per Kategori</p>
-                </div>
-            </div>
         </div>
 
         <div class="chart">

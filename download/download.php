@@ -5,7 +5,7 @@ require_once __DIR__ . '/../config.php';
 // Cek session USER, bukan admin
 if (!isset($_SESSION['user_id'])) {
  $_SESSION['error'] = "Anda harus login sebagai user terlebih dahulu";
- header("Location: " . BASE_URL . "views/auth/login.php");
+ header("Location: ../views/auth/login.php");
  exit();
 }
 ?>
@@ -22,7 +22,7 @@ if (!isset($_SESSION['user_id'])) {
 
 <body>
  <h1>
-  <a href="<?php echo BASE_URL; ?>views/auth/logout.php">Logout</a>
+  <a href="../views/auth/logout.php">Logout</a>
   HALLO DOWNLOAD
  </h1>
 </body>

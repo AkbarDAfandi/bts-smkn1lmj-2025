@@ -31,5 +31,5 @@ session_destroy();
 $_SESSION['success'] = "Anda telah berhasil logout";
 
 // Redirect ke halaman login
-header("Location: " . BASE_URL . "views/auth/login.php");
+header("Location: ../years/2024/index.php");
 exit();
