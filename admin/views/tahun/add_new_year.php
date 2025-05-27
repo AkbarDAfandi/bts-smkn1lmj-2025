@@ -7,7 +7,7 @@ require_once 'function_year.php';
 // Cek session dan role
 if (!isset($_SESSION['admin_id']) || $_SESSION['admin_role'] !== 'admin') {
     $_SESSION['error'] = "Anda tidak memiliki akses ke halaman ini";
-    header("Location: " . BASE_URL . "index.php");
+    header("Location: index.php");
     exit();
 }
 

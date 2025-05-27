@@ -4,7 +4,7 @@ require_once __DIR__ . '/../../../config.php';
 function getAvailableYears($pdo) {
     $stmt = $pdo->query("SELECT DISTINCT tahun FROM tahun_akademik ORDER BY tahun DESC");
     return $stmt->fetchAll(PDO::FETCH_COLUMN);
-}
+}   
 
 function addAcademicYear($pdo, $year) {
     // Cek apakah tahun sudah ada

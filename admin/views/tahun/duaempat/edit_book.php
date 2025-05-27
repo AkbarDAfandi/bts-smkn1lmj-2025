@@ -7,7 +7,7 @@ require_once __DIR__ . '/../../../../app/models/Category.php';
 // Check session and role
 if (!isset($_SESSION['admin_id']) || $_SESSION['admin_role'] !== 'admin') {
  $_SESSION['error'] = "Anda tidak memiliki akses ke halaman ini";
- header("Location: " . BASE_URL . "index.php");
+ header("Location: ../../../index.php");
  exit();
 }
 
@@ -19,7 +19,7 @@ $bookId = $_GET['id'] ?? null;
 
 if (!$bookId) {
  $_SESSION['error'] = "Buku tidak ditemukan";
- header("Location: " . BASE_URL . "admin/views/tahun/duaempat/duaempat.php");
+ header("Location: duaempat.php");
  exit();
 }
 
@@ -27,7 +27,7 @@ if (!$bookId) {
 $book = $bookModel->getById($bookId);
 if (!$book) {
  $_SESSION['error'] = "Buku tidak ditemukan";
- header("Location: " . BASE_URL . "admin/views/tahun/duaempat/duaempat.php");
+ header("Location: duaempat.php");
  exit();
 }
 
@@ -106,7 +106,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   if ($success) {
    $_SESSION['success'] = "Buku berhasil diperbarui";
-   header("Location: " . BASE_URL . "admin/views/tahun/duaempat/duaempat.php");
+   header("Location: duaempat.php");
    exit();
   } else {
    throw new Exception("Gagal memperbarui buku");
