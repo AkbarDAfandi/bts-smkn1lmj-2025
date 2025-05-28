@@ -42,7 +42,7 @@ try {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Buku Tahunan Siswa - 2024</title>
-    <link rel="stylesheet" href="/bts-smkn1lmj-2025/public/css/dua_empat.css">
+    <link rel="stylesheet" href="/../../../public/css/dua_empat.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="icon" href="/bts-smkn1lmj-2025/public/assets/img/logosmk.png" type="image/x-icon">
     <link rel="stylesheet" href="/bts-smkn1lmj-2025/admin/public/css/style.css">

@@ -36,20 +36,19 @@ try {
     die("Database error: " . $e->getMessage());
 }
 
-// Jika parameter download ada, langsung kirim file PDF dengan header yang benar
+// Handle download request
 if (isset($_GET['download'])) {
     if (!empty($book['content_path'])) {
         $filePath = __DIR__ . '/../../admin/public/uploads/' . $book['content_path'];
         
         if (file_exists($filePath)) {
             header('Content-Type: application/pdf');
-            header('Content-Disposition: inline; filename="' . basename($book['content_path']) . '"');
+            header('Content-Disposition: attachment; filename="' . basename($book['content_path']) . '"');
             header('Content-Length: ' . filesize($filePath));
             readfile($filePath);
             exit;
         }
     }
-    // Jika file tidak ditemukan, redirect kembali
     header('Location: /bts-smkn1lmj-2025/views/years/' . $year . '/');
     exit;
 }
@@ -57,6 +56,35 @@ if (isset($_GET['download'])) {
 // Determine if this is a teacher book
 $isTeacherBook = ($book['category_id'] == 2);
 ?>
+<script>
+// Function to detect mobile devices
+function isMobileDevice() {
+    return (
+        /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
+        (window.innerWidth <= 800 && window.innerHeight <= 900)
+    );
+}
+
+// Function to get current URL parameters
+function getUrlParams() {
+    const params = new URLSearchParams(window.location.search);
+    return {
+        id: params.get('id'),
+        year: params.get('year')
+    };
+}
+
+// Check if it's a mobile device and redirect
+if (isMobileDevice()) {
+    const params = getUrlParams();
+    const currentPath = window.location.pathname;
+    
+    // Only redirect if we're not already on the mobile page
+    if (!currentPath.includes('detail-mobile.php')) {
+        window.location.href = `/bts-smkn1lmj-2025/views/years/detail-mobile.php?id=${params.id}&year=${params.year}`;
+    }
+}
+</script>
 <!DOCTYPE html>
 <html lang="en">
 <head>

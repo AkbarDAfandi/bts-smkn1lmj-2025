@@ -22,6 +22,6 @@ if (ini_get("session.use_cookies")) {
 session_destroy();
 
 // Redirect ke halaman login 
-header("Location: " . BASE_URL . "admin/index.php");
+header("Location: admin/index.php");
 exit();
 ?>
