@@ -4,10 +4,10 @@ require_once __DIR__ . '/../../config.php';
 
 // Cek jika user sudah login (baik admin atau user biasa)
 if (isset($_SESSION['admin_id'])) {
-    header("Location: /bts-smkn1lmj-2025/admin/dashboard.php");
+    header("Location: admin/dashboard.php");
     exit();
 } elseif (isset($_SESSION['user_id'])) {
-    header("Location: /bts-smkn1lmj-2025/download/download.php");
+    header("Location: download/download.php");
     exit();
 }
 ?>
@@ -18,7 +18,6 @@ if (isset($_SESSION['admin_id'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign In</title>
-    <link rel="stylesheet" href="/bts-smkn1lmj-2025/admin/public/css/index.css">
 </head>
 
 <body>
@@ -39,7 +38,7 @@ if (isset($_SESSION['admin_id'])) {
             }
             ?>
 
-            <form action="/bts-smkn1lmj-2025/views/auth/proses_login.php" method="POST" onsubmit="return validateForm()">
+            <form action="proses_login.php" method="POST" onsubmit="return validateForm()">
                 <div class="form-group">
                     <label for="password">NIS</label>
                     <input type="password" id="password" placeholder="Your Password" name="password" required>
