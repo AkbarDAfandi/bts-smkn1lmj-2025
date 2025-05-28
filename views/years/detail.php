@@ -39,7 +39,7 @@ try {
 // Handle download request
 if (isset($_GET['download'])) {
     if (!empty($book['content_path'])) {
-        $filePath = __DIR__ . '/../../admin/public/uploads/' . $book['content_path'];
+        $filePath = __DIR__ . '/.././admin/public/uploads/' . $book['content_path'];
         
         if (file_exists($filePath)) {
             header('Content-Type: application/pdf');
@@ -93,14 +93,14 @@ if (isMobileDevice()) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title><?= htmlspecialchars($book['judul']) ?> - Buku Tahunan <?= $year ?></title>
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/bts-smkn1lmj-2025/public/css/detail.css">
+    <link rel="stylesheet" href="../../public/css/detail.css">
 </head>
 <body>
     <!-- HEADER -->
     <header class="header">
         <div class="header-content">
             <a href="/bts-smkn1lmj-2025/">
-                <img src="/bts-smkn1lmj-2025/public/assets/img/logosmk.png" alt="Logo SMK"> 
+                <img src="../../public/assets/img/logosmk.png" alt="Logo SMK"> 
                 <p class="header-title">Buku Tahunan Siswa - <?= $year ?></p>
             </a>
         </div>
@@ -109,10 +109,10 @@ if (isMobileDevice()) {
      <!-- MAIN CONTENT -->
     <main class="container">
         <div class="book-header">
-            <img src="/bts-smkn1lmj-2025/admin/public/uploads/<?= $book['cover_path'] ?>" 
+            <img src="../../admin/public/uploads/<?= $book['cover_path'] ?>" 
                  alt="<?= htmlspecialchars($book['judul']) ?>" 
                  class="book-cover"
-                 onerror="this.src='/bts-smkn1lmj-2025/public/assets/img/default-book.png'">
+                 onerror="this.src='../../public/assets/img/default-book.png'">
             
             <div>
                 <h1>
@@ -138,7 +138,7 @@ if (isMobileDevice()) {
 
         <?php if (!empty($book['content_path'])): ?>
             <div class="pdf-viewer-container">
-                <iframe src="/bts-smkn1lmj-2025/admin/public/uploads/<?= $book['content_path'] ?>#toolbar=0" 
+                <iframe src="../../admin/public/uploads/<?= $book['content_path'] ?>#toolbar=0" 
                         class="pdf-viewer">
                     Browser Anda tidak mendukung PDF. Silakan download <a href="?id=<?= $_GET['id'] ?>&year=<?= $year ?>&download=1">di sini</a>.
                 </iframe>
@@ -149,7 +149,7 @@ if (isMobileDevice()) {
             </div>
         <?php endif; ?>
         
-        <a href="/bts-smkn1lmj-2025/views/years/<?= $year ?>/" class="back-btn">
+        <a href="../../views/years/<?= $year ?>/" class="back-btn">
             <i class='bx bx-arrow-back'></i> Kembali ke Katalog <?= $year ?>
         </a>
     </main>

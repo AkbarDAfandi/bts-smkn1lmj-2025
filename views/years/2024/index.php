@@ -42,16 +42,16 @@ try {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Buku Tahunan Siswa - 2024</title>
-    <link rel="stylesheet" href="/../../../public/css/dua_empat.css">
+    <link rel="stylesheet" href="../../../public/css/dua_empat.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="icon" href="/bts-smkn1lmj-2025/public/assets/img/logosmk.png" type="image/x-icon">
+    <link rel="icon" href="../../../public/assets/img/logosmk.png" type="image/x-icon">
     <link rel="stylesheet" href="/bts-smkn1lmj-2025/admin/public/css/style.css">
 </head>
 <body>
     <header class="header">
         <div class="header-content">
             <a href="/bts-smkn1lmj-2025/">
-                <img src="/bts-smkn1lmj-2025/public/assets/img/logosmk.png" alt="Logo SMK"> 
+                <img src="../../../public/assets/img/logosmk.png" alt="Logo SMK"> 
                 <p class="header-title">Buku Tahunan Siswa - 2024</p>
             </a>
         </div>
@@ -64,7 +64,7 @@ try {
         <section class="content">
             <div class="video-container">
                 <div class="custom-video-frame">
-                    <img src="/bts-smkn1lmj-2025/public/assets/img/border.png" class="frame-image" alt="Video Frame">
+                    <img src="../../../public/assets/img/border.png" class="frame-image" alt="Video Frame">
                     <div class="video-carousel">
                         <div class="video-slide active">
                             <div class="youtube-video">
@@ -126,13 +126,13 @@ try {
                     <div class="buku-kelas">
                         <?php foreach ($category['books'] as $book): ?>
                             <div class="buku-kelas-card">
-                                <img src="/bts-smkn1lmj-2025/admin/public/uploads/<?= $book['cover_path'] ?>" 
+                                <img src="../../../admin/public/uploads/<?= $book['cover_path'] ?>" 
                                      alt="<?= htmlspecialchars($book['judul']) ?>" 
                                      onerror="this.src='/bts-smkn1lmj-2025/public/assets/buku-perkelas/osis55.png'">
                                 <h1><?= htmlspecialchars($book['judul']) ?></h1>
                                 <h2>Oleh <?= htmlspecialchars($book['penerbit'] ?? 'SMKN 1 Lumajang') ?></h2>
                                 <hr style="height:0.05em; border-width:0; background-color:black; margin-bottom:10px">
-                                <a href="/bts-smkn1lmj-2025/views/years/detail.php?id=<?= $book['id'] ?>&year=2024">
+                                <a href="../detail.php?id=<?= $book['id'] ?>&year=2024">
                                     <button>Lihat selengkapnya</button>
                                 </a>
                             </div>

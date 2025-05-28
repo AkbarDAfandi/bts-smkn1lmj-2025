@@ -1,7 +1,5 @@
     <?php
 
-
-
     $host = 'localhost';
     $dbname = 'buku-tahunan-siswa';
     $username = 'root';

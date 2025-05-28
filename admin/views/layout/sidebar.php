@@ -3,15 +3,19 @@
 if (!defined('ADMIN_PATH')) {
     define('ADMIN_PATH', realpath(__DIR__ . '/../../'));
 }
-require_once __DIR__ . '/../../../config.php';
+
+// Pastikan session sudah dimulai
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 // Strict admin access check
 if (!isset($_SESSION['admin_id']) || $_SESSION['admin_role'] !== 'admin') {
-    header('Location: index.php');
+    header('Location: ../../auth/login.php');
     exit();
 }
 
-$current_page = basename($_SERVER['PHP_SELF']);
+$current_page = basename($_SERVER['PHP_SELF'] ?? 'dashboard.php');
 $sidebar_collapsed = isset($_COOKIE['sidebar_collapsed']) && $_COOKIE['sidebar_collapsed'] === 'true';
 ?>
 
@@ -21,11 +25,11 @@ $sidebar_collapsed = isset($_COOKIE['sidebar_collapsed']) && $_COOKIE['sidebar_c
         <h1>BTS Admin</h1>
     </div>
 
-     <div class="sidebar-content">
+    <div class="sidebar-content">
         <p class="sidebar-category">Main</p>
         <ul class="sidebar-menu">
             <li class="<?= $current_page == 'dashboard.php' ? 'active' : '' ?>">
-                <a href="/bts-smkn1lmj-2025/admin/views/dashboard.php" class="nav-link">
+                <a href="../../views/dashboard.php" class="nav-link">
                     <i class="fas fa-home"></i>
                     <span>Dashboard</span>
                 </a>
@@ -35,13 +39,15 @@ $sidebar_collapsed = isset($_COOKIE['sidebar_collapsed']) && $_COOKIE['sidebar_c
         <p class="sidebar-category">Content</p>
         <ul class="sidebar-menu">
             <li class="<?= $current_page == 'category.php' ? 'active' : '' ?>">
-                <a href="/bts-smkn1lmj-2025/admin/views/category/category.php" class="nav-link">
-                    <i class="fas fa-list-alt"></i>
+               <a href="<?= $current_page == 'empty.php' ? '../category/category.php' : '../views/category/category.php' ?>"
+                    class="nav-link">
+                    <i class="fas fa-calendar"></i>
                     <span>Category</span>
                 </a>
             </li>
             <li class="<?= $current_page == 'empty.php' ? 'active' : '' ?>">
-                <a href="/bts-smkn1lmj-2025/admin/views/tahun/empty.php" class="nav-link">
+                <a href="<?= $current_page == 'category.php' ? '../tahun/empty.php' : '../views/tahun/empty.php' ?>"
+                    class="nav-link">
                     <i class="fas fa-calendar"></i>
                     <span>Year Selection</span>
                 </a>
@@ -50,9 +56,8 @@ $sidebar_collapsed = isset($_COOKIE['sidebar_collapsed']) && $_COOKIE['sidebar_c
 
         <p class="sidebar-category">Other</p>
         <ul class="sidebar-menu">
-           
             <li class="logout-item">
-                <a href="/bts-smkn1lmj-2025/admin/auth/logout.php" class="nav-link">
+                <a href="../../auth/logout.php" class="nav-link">
                     <i class="fas fa-sign-out-alt"></i>
                     <span>Logout</span>
                 </a>
@@ -74,54 +79,67 @@ $sidebar_collapsed = isset($_COOKIE['sidebar_collapsed']) && $_COOKIE['sidebar_c
         const sidebar = document.getElementById('sidebar');
         const sidebarToggle = document.getElementById('sidebarToggle');
         const mobileMenuToggle = document.getElementById('mobileMenuToggle');
-        const mainContent = document.querySelector('.main-content');
+        const mainContent = document.querySelector('.main-content') || document.body;
 
         // Toggle sidebar collapse with cookie persistence
-        sidebarToggle.addEventListener('click', function() {
-            const isCollapsed = sidebar.classList.toggle('collapsed');
-            document.cookie = `sidebar_collapsed=${isCollapsed}; path=/`;
-            
-            const icon = this.querySelector('i');
-            icon.classList.toggle('fa-chevron-left');
-            icon.classList.toggle('fa-chevron-right');
-        });
+        if (sidebarToggle) {
+            sidebarToggle.addEventListener('click', function() {
+                const isCollapsed = sidebar.classList.toggle('collapsed');
+                document.cookie =
+                    `sidebar_collapsed=${isCollapsed}; path=/; max-age=${60 * 60 * 24 * 30}`; // 30 hari
+
+                const icon = this.querySelector('i');
+                if (icon) {
+                    icon.classList.toggle('fa-chevron-left');
+                    icon.classList.toggle('fa-chevron-right');
+                }
+            });
+        }
 
         // Toggle mobile menu
-        mobileMenuToggle.addEventListener('click', function() {
-            sidebar.classList.toggle('show');
-        });
+        if (mobileMenuToggle) {
+            mobileMenuToggle.addEventListener('click', function() {
+                sidebar.classList.toggle('show');
+            });
+        }
 
         // Responsive handling
         function handleResponsive() {
             if (window.innerWidth <= 768) {
                 sidebar.classList.remove('collapsed');
-                mobileMenuToggle.style.display = 'block';
-                sidebarToggle.style.display = 'none';
-                sidebar.style.transform = sidebar.classList.contains('show') ? 
+                if (mobileMenuToggle) mobileMenuToggle.style.display = 'block';
+                if (sidebarToggle) sidebarToggle.style.display = 'none';
+                sidebar.style.transform = sidebar.classList.contains('show') ?
                     'translateX(0)' : 'translateX(-100%)';
             } else {
-                mobileMenuToggle.style.display = 'none';
-                sidebarToggle.style.display = 'flex';
+                if (mobileMenuToggle) mobileMenuToggle.style.display = 'none';
+                if (sidebarToggle) sidebarToggle.style.display = 'flex';
                 sidebar.style.transform = 'translateX(0)';
             }
         }
 
         // Event listeners
         window.addEventListener('resize', handleResponsive);
-        mainContent.addEventListener('click', function() {
-            if (window.innerWidth <= 768 && sidebar.classList.contains('show')) {
-                sidebar.classList.remove('show');
-            }
-        });
+
+        if (mainContent) {
+            mainContent.addEventListener('click', function() {
+                if (window.innerWidth <= 768 && sidebar.classList.contains('show')) {
+                    sidebar.classList.remove('show');
+                }
+            });
+        }
 
         // Initialize
         handleResponsive();
 
         // Enhanced logout confirmation
-        document.querySelector('.logout-item a')?.addEventListener('click', function(e) {
-            if (!confirm('Apakah Anda yakin ingin logout?')) {
-                e.preventDefault();
-            }
-        });
+        const logoutItem = document.querySelector('.logout-item a');
+        if (logoutItem) {
+            logoutItem.addEventListener('click', function(e) {
+                if (!confirm('Apakah Anda yakin ingin logout?')) {
+                    e.preventDefault();
+                }
+            });
+        }
     });
 </script>
