@@ -5,7 +5,7 @@ require_once __DIR__ . '/../../../config.php';
 // Check admin session and role
 if (!isset($_SESSION['admin_id'])) {
     $_SESSION['error'] = "Anda harus login terlebih dahulu";
-    header("Location: " . BASE_URL . "index.php");
+    header("Location: index.php");
     exit();
 }
 

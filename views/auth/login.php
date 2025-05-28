@@ -39,7 +39,7 @@ if (isset($_SESSION['admin_id'])) {
             }
             ?>
 
-            <form action="/bts-smkn1lmj-2025/views/auth/proses_login.php" method="POST">
+            <form action="/bts-smkn1lmj-2025/views/auth/proses_login.php" method="POST" onsubmit="return validateForm()">
                 <div class="form-group">
                     <label for="password">NIS</label>
                     <input type="password" id="password" placeholder="Your Password" name="password" required>
@@ -48,5 +48,17 @@ if (isset($_SESSION['admin_id'])) {
             </form>
         </div>
     </div>
+
+    <script>
+        function validateForm(){
+            let password = document.getElementById('password');
+
+            let trimmedPassword = password.value.trim();
+
+            passwordInput.value = trimmmedPassword;
+
+            return true;
+        }
+    </script>
 </body>
 </html>
