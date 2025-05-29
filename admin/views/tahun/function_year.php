@@ -22,16 +22,14 @@ function addAcademicYear($pdo, $year) {
 }
 
 function deleteAcademicYear($pdo, $year) {
-    // Hapus tahun akademik
+    // Hapus tahun akademik dan buku terkait (karena ada ON DELETE CASCADE)
     $stmt = $pdo->prepare("DELETE FROM tahun_akademik WHERE tahun = ?");
     return $stmt->execute([$year]);
 }
 
-function getYearPagePath($year) {
-    $yearPages = [
-        '2024' => 'duaempat/duaempat.php',
-        '2025' => 'dualima/dualima.php'
-    ];
-    return $yearPages[$year] ?? 'duaempat/duaempat.php';
-}   
+function getAcademicYearId($pdo, $year) {
+    $stmt = $pdo->prepare("SELECT id FROM tahun_akademik WHERE tahun = ?");
+    $stmt->execute([$year]);
+    return $stmt->fetchColumn();
+}
 ?>
