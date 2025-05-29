@@ -75,17 +75,20 @@ if (isset($_GET['delete']) && is_numeric($_GET['delete'])) {
                 <?php unset($_SESSION['success']); ?>
             <?php endif; ?>
 
+
             <div class="year-grid">
                 <?php foreach ($availableYears as $year): ?>
                     <div class="year-card">
                         <button class="delete-btn" onclick="event.stopPropagation(); confirmDelete(<?= $year ?>)">
                             <i class="fas fa-trash-alt"></i>
                         </button>
-                        <div class="year-card-content" onclick="window.location.href='<?= getYearPagePath($year) ?>?tahun=<?= $year ?>'">
-                            <h3><?= $year ?></h3>
+                        <div class="year-card-content" onclick="window.location.href='../books/year_books.php?tahun=<?= $year ?>'">
+                            <span class="year-text"><?= $year ?></span>
                         </div>
                     </div>
                 <?php endforeach; ?>
+            </div>
+
             </div>
         </div>
     </div>
