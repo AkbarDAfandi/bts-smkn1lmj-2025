@@ -3,7 +3,7 @@ require_once __DIR__ . '/../../config.php';
 session_start();
 
 if (!isset($_GET['id']) || !isset($_GET['year'])) {
-    header('Location: /bts-smkn1lmj-2025/');
+    header('Location: ');
     exit;
 }
 
@@ -14,7 +14,7 @@ try {
     $stmt = $pdo->prepare("SELECT id FROM tahun_akademik WHERE tahun = ?");
     $stmt->execute([$year]);
     $tahun_akademik_id = $stmt->fetchColumn();
-    
+
     if (!$tahun_akademik_id) {
         die("Tahun akademik tidak valid");
     }
@@ -26,12 +26,11 @@ try {
                           WHERE b.id = ? AND b.tahun_akademik_id = ?");
     $stmt->execute([$_GET['id'], $tahun_akademik_id]);
     $book = $stmt->fetch();
-    
+
     if (!$book) {
         header('Location: /bts-smkn1lmj-2025/views/years/' . $year . '/');
         exit;
     }
-
 } catch (PDOException $e) {
     die("Database error: " . $e->getMessage());
 }
@@ -40,7 +39,7 @@ try {
 if (isset($_GET['download'])) {
     if (!empty($book['content_path'])) {
         $filePath = __DIR__ . '/../../admin/public/uploads/' . $book['content_path'];
-        
+
         if (file_exists($filePath)) {
             header('Content-Type: application/pdf');
             header('Content-Disposition: inline; filename="' . basename($book['content_path']) . '"');
@@ -49,7 +48,7 @@ if (isset($_GET['download'])) {
             exit;
         }
     }
-    header('Location: /bts-smkn1lmj-2025/views/years/' . $year . '/');
+    header('Location: ' . $year . '/');
     exit;
 }
 
@@ -57,43 +56,44 @@ if (isset($_GET['download'])) {
 $isTeacherBook = ($book['category_id'] == 2);
 ?>
 <script>
-// Function to detect mobile devices
-function isMobileDevice() {
-    return (
-        /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
-        (window.innerWidth <= 800 && window.innerHeight <= 900)
-    );
-}
-
-// Function to get current URL parameters
-function getUrlParams() {
-    const params = new URLSearchParams(window.location.search);
-    return {
-        id: params.get('id'),
-        year: params.get('year')
-    };
-}
-
-// Check if it's a mobile device and redirect
-if (isMobileDevice()) {
-    const params = getUrlParams();
-    const currentPath = window.location.pathname;
-    
-    // Only redirect if we're not already on the mobile page
-    if (!currentPath.includes('detail-mobile.php')) {
-        window.location.href = `/bts-smkn1lmj-2025/views/years/detail-mobile.php?id=${params.id}&year=${params.year}`;
+    // Function to detect mobile devices
+    function isMobileDevice() {
+        return (
+            /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
+            (window.innerWidth <= 800 && window.innerHeight <= 900)
+        );
     }
-}
+
+    // Function to get current URL parameters
+    function getUrlParams() {
+        const params = new URLSearchParams(window.location.search);
+        return {
+            id: params.get('id'),
+            year: params.get('year')
+        };
+    }
+
+    // Check if it's a mobile device and redirect
+    if (isMobileDevice()) {
+        const params = getUrlParams();
+        const currentPath = window.location.pathname;
+
+        // Only redirect if we're not already on the mobile page
+        if (!currentPath.includes('detail-mobile.php')) {
+            window.location.href = `../../detail-mobile.php?id=${params.id}&year=${params.year}`;
+        }
+    }
 </script>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title><?= htmlspecialchars($book['judul']) ?> - Buku Tahunan <?= $year ?></title>
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/bts-smkn1lmj-2025/public/css/detail.css">
+    <link rel="stylesheet" href="../../public/css/detail.css">
     <!-- PDF.js from CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.min.js"></script>
     <style>
@@ -108,7 +108,7 @@ if (isMobileDevice()) {
             height: 80vh;
             max-height: 800px;
         }
-        
+
         #pdf-container {
             width: 100%;
             height: 100%;
@@ -123,64 +123,60 @@ if (isMobileDevice()) {
             -webkit-overflow-scrolling: touch;
             padding: 20px;
         }
-        
+
         #pdf-viewer {
             max-width: none;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             touch-action: pan-x pan-y pinch-zoom;
         }
-        
+
         .pdf-controls {
             display: flex;
-            flex-direction: column;
-            align-items: center;
+            justify-content: center;
             gap: 15px;
             margin: 15px 0;
             padding: 15px;
-            background: #f5f5f5;
-            border-radius: 8px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
         .control-group {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 15px;
-            width: 100%;
-        }
-
-        .navigation-controls {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .horizontal-controls {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .zoom-controls {
             display: flex;
             gap: 10px;
         }
 
         .pdf-controls button {
-            padding: 12px;
-            width: 50px;
-            height: 50px;
+            width: 55px;
+            height: 55px;
             display: flex;
             align-items: center;
             justify-content: center;
             background: #4a6baf;
             color: white;
             border: none;
-            border-radius: 8px;
+            border-radius: 12px;
             cursor: pointer;
-            font-size: 24px;
-            transition: background-color 0.2s, transform 0.1s;
+            font-size: 22px;
+            transition: all 0.2s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pdf-controls button:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .pdf-controls button:hover:after {
+            opacity: 1;
         }
 
         .pdf-controls button:active {
@@ -189,9 +185,11 @@ if (isMobileDevice()) {
 
         .pdf-controls button:hover {
             background: #3a5a9f;
+            box-shadow: 0 4px 12px rgba(74, 107, 175, 0.3);
         }
 
-        #prev-page, #next-page {
+        #prev-page,
+        #next-page {
             width: auto;
             padding: 12px 20px;
         }
@@ -199,99 +197,103 @@ if (isMobileDevice()) {
         .pdf-controls button:disabled {
             background: #cccccc;
             cursor: not-allowed;
+            box-shadow: none;
         }
 
         .page-info {
-            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-size: 14px;
-            color: #666;
+            color: #555;
+            background: #fff;
+            padding: 8px 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        #zoom-level {
+            display: inline-block;
+            min-width: 60px;
+            text-align: center;
+            background: #fff;
+            padding: 8px 15px;
+            border-radius: 10px;
+            font-weight: bold;
+            color: #4a6baf;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .pdf-toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 15px;
+            background: #f8f9fa;
+            border-radius: 12px 12px 0 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .page-navigation,
+        .zoom-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         @media (max-width: 480px) {
-            .pdf-controls button {
-                padding: 10px;
-                width: 45px;
-                height: 45px;
-                font-size: 20px;
-            }
-        }
-        
-        .pdf-controls button {
-            background: #4a6baf;
-            color: white;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background 0.3s;
-        }
-        
-        .pdf-controls button:hover {
-            background: #3a5a9f;
-        }
-        
-        .pdf-controls button:disabled {
-            background: #cccccc;
-            cursor: not-allowed;
-        }
-        
-        .page-counter {
-            font-size: 16px;
-            color: #333;
-        }
-        
-        .loading {
-            padding: 20px;
-            color: #666;
-        }
-        
-        @media (max-width: 768px) {
-            #pdf-container {
-                min-height: 300px;
-            }
-            
             .pdf-controls {
                 flex-wrap: wrap;
+            }
+
+            .pdf-controls button {
+                width: 50px;
+                height: 50px;
+                font-size: 20px;
+            }
+
+            .pdf-toolbar {
+                flex-direction: column;
                 gap: 10px;
             }
         }
     </style>
 </head>
+
 <body>
     <!-- HEADER -->
     <header class="header">
         <div class="header-content">
-            <a href="/bts-smkn1lmj-2025/">
-                <img src="/bts-smkn1lmj-2025/public/assets/img/logosmk.png" alt="Logo SMK"> 
+            <a href="../../index.php">
+                <img src="../../public/assets/img/logosmk.png" alt="Logo SMK">
                 <p class="header-title">Buku Tahunan Siswa - <?= $year ?></p>
             </a>
         </div>
     </header>
-    
-     <!-- MAIN CONTENT -->
+
+    <!-- MAIN CONTENT -->
     <main class="container">
         <div class="book-header">
-            <img src="/bts-smkn1lmj-2025/admin/public/uploads/<?= $book['cover_path'] ?>" 
-                 alt="<?= htmlspecialchars($book['judul']) ?>" 
-                 class="book-cover"
-                 onerror="this.src='/bts-smkn1lmj-2025/public/assets/img/default-book.png'">
-            
+            <img src="../../admin/public/uploads/<?= $book['cover_path'] ?>"
+                alt="<?= htmlspecialchars($book['judul']) ?>"
+                class="book-cover"
+                onerror="this.src='../../public/assets/img/default-book.png'">
+
             <div class="book-info">
                 <h1>
                     <?= htmlspecialchars($book['judul']) ?>
-                    <?php if($isTeacherBook): ?>
+                    <?php if ($isTeacherBook): ?>
                         <span class="teacher-badge">Guru</span>
                     <?php endif; ?>
                 </h1>
                 <div class="book-details">
                     <p><strong>Kategori:</strong> <?= htmlspecialchars($book['category_name']) ?></p>
                     <p><strong>Tahun:</strong> <?= $year ?></p>
-                    <?php if(!empty($book['penerbit'])): ?>
+                    <?php if (!empty($book['penerbit'])): ?>
                         <p><strong>Penerbit:</strong> <?= htmlspecialchars($book['penerbit']) ?></p>
                     <?php endif; ?>
                 </div>
-                
+
                 <?php if (!empty($book['content_path'])): ?>
                     <div class="action-buttons">
                         <a href="?id=<?= $_GET['id'] ?>&year=<?= $year ?>&download=1" class="btn download-btn">
@@ -336,29 +338,49 @@ if (isMobileDevice()) {
                 </div>
 
                 <div class="pdf-controls">
-                    <div class="control-panel">
-                        <div class="nav-row">
-                            <button id="move-up" class="btn nav-btn">
-                                <i class='bx bx-up-arrow-alt'></i>
-                            </button>
+                    <div class="control-group">
+                        <button id="prev-page" class="btn nav-btn" title="Halaman Sebelumnya">
+                            <i class='bx bx-chevron-left'></i>
+                        </button>
+                        <div class="page-info">
+                            <span id="page-num">1</span> / <span id="page-count">0</span>
                         </div>
-                        <div class="nav-row">
-                            <button id="move-left" class="btn nav-btn">
-                                <i class='bx bx-left-arrow-alt'></i>
-                            </button>
-                            <button id="reset-view" class="btn nav-btn">
-                                <i class='bx bx-reset'></i>
-                            </button>
-                            <button id="move-right" class="btn nav-btn">
-                                <i class='bx bx-right-arrow-alt'></i>
-                            </button>
-                        </div>
-                        <div class="nav-row">
-                            <button id="move-down" class="btn nav-btn">
-                                <i class='bx bx-down-arrow-alt'></i>
-                            </button>
-                        </div>
+                        <button id="next-page" class="btn nav-btn" title="Halaman Berikutnya">
+                            <i class='bx bx-chevron-right'></i>
+                        </button>
                     </div>
+
+                    <div class="control-group">
+                        <button id="zoom-out" class="btn" title="Perkecil">
+                            <i class='bx bx-zoom-out'></i>
+                        </button>
+                        <span id="zoom-level">100%</span>
+                        <button id="zoom-in" class="btn" title="Perbesar">
+                            <i class='bx bx-zoom-in'></i>
+                        </button>
+                    </div>
+
+                    <div class="control-group">
+                        <button id="move-left" class="btn nav-btn" title="Geser Kiri">
+                            <i class='bx bx-left-arrow-alt'></i>
+                        </button>
+                        <button id="move-right" class="btn nav-btn" title="Geser Kanan">
+                            <i class='bx bx-right-arrow-alt'></i>
+                        </button>
+                    </div>
+
+                    <div class="control-group">
+                        <button id="move-up" class="btn nav-btn" title="Geser Atas">
+                            <i class='bx bx-up-arrow-alt'></i>
+                        </button>
+                        <button id="move-down" class="btn nav-btn" title="Geser Bawah">
+                            <i class='bx bx-down-arrow-alt'></i>
+                        </button>
+                    </div>
+
+                    <button id="reset-view" class="btn nav-btn" title="Reset Tampilan">
+                        <i class='bx bx-reset'></i>
+                    </button>
                 </div>
             </div>
         <?php else: ?>
@@ -366,8 +388,8 @@ if (isMobileDevice()) {
                 <i class='bx bx-error'></i> File buku tidak tersedia
             </div>
         <?php endif; ?>
-        
-        <a href="/bts-smkn1lmj-2025/views/years/<?= $year ?>/" class="btn back-btn">
+
+        <a href="<?= $year ?>/" class="btn back-btn">
             <i class='bx bx-arrow-back'></i> Kembali ke Katalog <?= $year ?>
         </a>
     </main>
@@ -396,76 +418,80 @@ if (isMobileDevice()) {
     <script>
         // Initialize PDF.js
         pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.worker.min.js';
-        
+
         // PDF variables
         let pdfDoc = null,
             pageNum = 1,
             pageRendering = false,
             pageNumPending = null,
-            scale = 2.0,
+            scale = 0.6,
             maxScale = 5.0,
-            minScale = 1.0,
-            defaultScale = 2.0,
+            minScale = 0.1,
+            defaultScale = 0.6,
             currentX = 0,
             currentY = 0;
-        
-        const url = '/bts-smkn1lmj-2025/admin/public/uploads/<?= $book['content_path'] ?>';
+
+        const url = '../../admin/public/uploads/<?= $book['content_path'] ?>';
         const container = document.getElementById('pdf-container');
         const canvas = document.getElementById('pdf-viewer');
         const ctx = canvas.getContext('2d');
-        
+
         // Get control elements
         const pageNumElement = document.getElementById('page-num');
         const pageCountElement = document.getElementById('page-count');
         const prevPageButton = document.getElementById('prev-page');
         const nextPageButton = document.getElementById('next-page');
-        
+
         // Calculate optimal scale for device
         function calculateScale(viewport) {
             const containerWidth = container.clientWidth - 40;
             const containerHeight = container.clientHeight - 40;
-            
+
             // Calculate scales to fit width and height
             const scaleX = containerWidth / viewport.width;
             const scaleY = containerHeight / viewport.height;
-            
-            // Use scale to fit width for better readability
-            defaultScale = Math.max(scaleX, 1.5);
-            
-            // On mobile, ensure text is even more readable
+
+            // Use scale to fit width, but make it 30% of original default (lower than before)
+            defaultScale = Math.max(scaleX * 0.3, 0.6);
+
+            // On mobile, ensure text is still readable
             if (window.innerWidth <= 768) {
-                defaultScale = Math.max(defaultScale, 2.0);
+                defaultScale = Math.max(defaultScale, 0.6);
             }
-            
+
             // Use current scale if it exists, otherwise use default
             return scale || defaultScale;
         }
-        
+
         // Render PDF page
         function renderPage(num) {
             pageRendering = true;
-            
+
             // Remove loading message
             const loadingElement = document.querySelector('.loading');
             if (loadingElement) loadingElement.remove();
-            
+
             pdfDoc.getPage(num).then(function(page) {
-                const viewport = page.getViewport({ scale: 1.0 });
+                const viewport = page.getViewport({
+                    scale: 1.0
+                });
                 scale = calculateScale(viewport);
-                const scaledViewport = page.getViewport({ scale: scale });
-                
+                const scaledViewport = page.getViewport({
+                    scale: scale
+                });
+
                 // Set canvas dimensions
                 canvas.height = scaledViewport.height;
                 canvas.width = scaledViewport.width;
-                
+
                 // Render PDF page
                 const renderContext = {
                     canvasContext: ctx,
                     viewport: scaledViewport
                 };
-                
+
                 const renderTask = page.render(renderContext);
-                
+
                 renderTask.promise.then(function() {
                     pageRendering = false;
                     if (pageNumPending !== null) {
@@ -474,15 +500,15 @@ if (isMobileDevice()) {
                     }
                 });
             });
-            
+
             // Update page counter
             pageNumElement.textContent = num;
-            
+
             // Enable/disable buttons
             prevPageButton.disabled = (num <= 1);
             nextPageButton.disabled = (num >= pdfDoc.numPages);
         }
-        
+
         // Queue page render
         function queueRenderPage(num) {
             if (pageRendering) {
@@ -491,21 +517,21 @@ if (isMobileDevice()) {
                 renderPage(num);
             }
         }
-        
+
         // Previous page
         function onPrevPage() {
             if (pageNum <= 1) return;
             pageNum--;
             queueRenderPage(pageNum);
         }
-        
+
         // Next page
         function onNextPage() {
             if (pageNum >= pdfDoc.numPages) return;
             pageNum++;
             queueRenderPage(pageNum);
         }
-        
+
         // Load PDF document
         pdfjsLib.getDocument({
             url: url,
@@ -514,10 +540,10 @@ if (isMobileDevice()) {
         }).promise.then(function(pdfDoc_) {
             pdfDoc = pdfDoc_;
             pageCountElement.textContent = pdfDoc.numPages;
-            
+
             // Initial render
             renderPage(pageNum);
-            
+
             // Handle window resize
             let resizeTimeout;
             window.addEventListener('resize', function() {
@@ -536,7 +562,7 @@ if (isMobileDevice()) {
             `;
             console.error('PDF error:', error);
         });
-        
+
         // Zoom functions
         function zoomIn() {
             if (scale < maxScale) {
@@ -560,8 +586,20 @@ if (isMobileDevice()) {
         document.getElementById('zoom-in').addEventListener('click', zoomIn);
         document.getElementById('zoom-out').addEventListener('click', zoomOut);
 
-        // Initial zoom level display
-        updateZoomLevel();
+        // Update the zoom level display
+        function updateZoomLevel() {
+            let zoomPercentage = Math.round(scale * 100 / defaultScale);
+            // If scale is at minimum, show as 0%
+            if (scale <= minScale) zoomPercentage = 0;
+            document.getElementById('zoom-level').textContent = `${zoomPercentage}%`;
+
+            // Add visual feedback
+            const zoomLevelElement = document.getElementById('zoom-level');
+            zoomLevelElement.style.transform = 'scale(1.1)';
+            setTimeout(() => {
+                zoomLevelElement.style.transform = 'scale(1)';
+            }, 200);
+        }
 
         // Pinch zoom events
         container.addEventListener('touchstart', function(e) {
@@ -573,7 +611,9 @@ if (isMobileDevice()) {
                 );
                 initialPinchDistance = startDistance;
             }
-        }, { passive: false });
+        }, {
+            passive: false
+        });
 
         container.addEventListener('touchmove', function(e) {
             if (e.touches.length === 2) {
@@ -582,11 +622,11 @@ if (isMobileDevice()) {
                     e.touches[0].pageX - e.touches[1].pageX,
                     e.touches[0].pageY - e.touches[1].pageY
                 );
-                
+
                 if (startDistance) {
                     const pinchRatio = currentDistance / initialPinchDistance;
                     const newScale = Math.min(Math.max(minScale, scale * pinchRatio), maxScale);
-                    
+
                     if (Math.abs(newScale - scale) > 0.1) {
                         scale = newScale;
                         queueRenderPage(pageNum);
@@ -594,25 +634,23 @@ if (isMobileDevice()) {
                     }
                 }
             }
-        }, { passive: false });
+        }, {
+            passive: false
+        });
 
         container.addEventListener('touchend', function(e) {
             startDistance = null;
             initialPinchDistance = null;
         });
-        
+
         // PDF Navigation and Controls
         const moveStep = 50;
-
-        function updateZoomLevel() {
-            document.getElementById('zoom-level').textContent = `${Math.round(scale * 100)}%`;
-        }
 
         function moveView(direction) {
             const container = document.getElementById('pdf-container');
             const step = moveStep * scale;
-            
-            switch(direction) {
+
+            switch (direction) {
                 case 'left':
                     container.scrollLeft -= step;
                     break;
@@ -646,7 +684,7 @@ if (isMobileDevice()) {
 
         // Add keyboard navigation
         document.addEventListener('keydown', function(e) {
-            switch(e.key) {
+            switch (e.key) {
                 case 'ArrowLeft':
                     moveView('left');
                     break;
@@ -661,7 +699,7 @@ if (isMobileDevice()) {
                     break;
             }
         });
-        
+
         // Disable double-tap zoom on buttons
         const buttons = document.querySelectorAll('button, a');
         buttons.forEach(button => {
@@ -674,4 +712,5 @@ if (isMobileDevice()) {
         });
     </script>
 </body>
+
 </html>

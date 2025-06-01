@@ -22,11 +22,21 @@ try {
     // Total academic years count
     $stmt = $pdo->query("SELECT COUNT(*) as total_years FROM tahun_akademik");
     $totalYears = $stmt->fetch(PDO::FETCH_ASSOC)['total_years'];
+    
+    // Get book distribution by category for the chart
+    $categoryStmt = $pdo->query("
+        SELECT c.name, COUNT(b.id) as book_count 
+        FROM categories c
+        LEFT JOIN books b ON c.id = b.category_id 
+        GROUP BY c.id, c.name
+    ");
+    $categories = $categoryStmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
     // Handle error if needed
     $totalBooks = 0;
     $totalCategories = 0;
     $totalYears = 0;
+    $categories = [];
     error_log("Database error: " . $e->getMessage());
 }
 ?>
@@ -78,6 +88,275 @@ try {
 
         body {
             font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .main-content {
+            margin-left: 250px;
+            padding: 20px;
+            transition: margin-left 0.3s;
+        }
+
+        .header {
+            margin-bottom: 30px;
+        }
+
+        .greeting {
+            font-size: 24px;
+            color: #333;
+        }
+
+        /* Stats Container */
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+        }
+
+        .stat-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+            font-size: 24px;
+            color: white;
+        }
+
+        .stat-icon.blue {
+            background: #4285F4;
+        }
+
+        .stat-icon.green {
+            background: #34A853;
+        }
+
+        .stat-icon.orange {
+            background: #FBBC05;
+        }
+
+        .stat-icon.purple {
+            background: #9B59B6;
+        }
+
+        .stat-icon.red {
+            background: #EA4335;
+        }
+
+        .stat-info h3 {
+            margin: 0;
+            font-size: 28px;
+            color: #333;
+        }
+
+        .stat-info p {
+            margin: 5px 0 0;
+            color: #666;
+            font-size: 14px;
+        }
+
+        /* Charts */
+        .chart-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .chart {
+            background: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .chart-header {
+            margin-bottom: 20px;
+        }
+
+        .chart-header h3 {
+            margin: 0;
+            font-size: 18px;
+            color: #333;
+        }
+
+        /* Recent Books */
+        .recent-books {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .book-item {
+            display: flex;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .book-item:last-child {
+            border-bottom: none;
+        }
+
+        .book-icon {
+            width: 40px;
+            height: 40px;
+            background: #f5f5f5;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            color: #4285F4;
+        }
+
+        .book-info {
+            flex: 1;
+        }
+
+        .book-info h4 {
+            margin: 0 0 5px;
+            font-size: 15px;
+            color: #333;
+        }
+
+        .book-info p {
+            margin: 0 0 3px;
+            font-size: 13px;
+            color: #666;
+        }
+
+        .book-date {
+            font-size: 12px;
+            color: #999;
+        }
+
+        /* Year Stats */
+        .year-stats {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .year-item {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .year-info {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+        }
+
+        .year-bar {
+            height: 8px;
+            background: #f0f0f0;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .year-fill {
+            height: 100%;
+            background: #4285F4;
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+
+        /* Category Distribution */
+        .location-chart {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .progress-item {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: #f0f0f0;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .main-content {
+                margin-left: 0;
+                padding-top: 70px;
+            }
+            
+            .stats-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .chart-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .greeting {
+                font-size: 20px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .stat-card {
+                flex-direction: column;
+                text-align: center;
+                padding: 15px;
+            }
+            
+            .stat-icon {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+            
+            .book-item {
+                flex-direction: column;
+                text-align: center;
+                padding: 15px 0;
+            }
+            
+            .book-icon {
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
         }
     </style>
 </head>
@@ -120,35 +399,6 @@ try {
                     <h3><?= $totalYears ?></h3>
                     <p>Tahun Akademik</p>
                 </div>
-            </div>
-
-        </div>
-
-        <div class="chart">
-            <div class="chart-header">
-
-            </div>
-            <div class="location-chart">
-                <?php
-                // Get book distribution by category
-                $categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-                $colors = ['blue', 'green', 'orange', 'purple', 'red'];
-                $i = 0;
-                foreach ($categories as $category):
-                    $percentage = $totalBooks > 0 ? round(($category['book_count'] / $totalBooks) * 100) : 0;
-                ?>
-                    <div class="progress-item">
-                        <div class="progress-info">
-                            <span><?= htmlspecialchars($category['name']) ?></span>
-                            <span><?= $category['book_count'] ?></span>
-                        </div>
-
-                    </div>
-                <?php
-
-                endforeach;
-                ?>
             </div>
         </div>
 
@@ -200,14 +450,13 @@ try {
                 <div class="year-stats">
                     <?php
                     // Get books by academic year
-                    // Change this query:
                     $stmt = $pdo->query("
-    SELECT t.tahun, COUNT(b.id) as book_count 
-    FROM tahun_akademik t
-    LEFT JOIN books b ON t.id = b.tahun_akademik_id 
-    GROUP BY t.id, t.tahun 
-    ORDER BY t.tahun DESC
-");
+                        SELECT t.tahun, COUNT(b.id) as book_count 
+                        FROM tahun_akademik t
+                        LEFT JOIN books b ON t.id = b.tahun_akademik_id 
+                        GROUP BY t.id, t.tahun 
+                        ORDER BY t.tahun DESC
+                    ");
                     $years = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
                     if (empty($years)) {
@@ -232,6 +481,22 @@ try {
             </div>
         </div>
     </div>
+
+    <script>
+        // Toggle sidebar on mobile
+        document.addEventListener('DOMContentLoaded', function() {
+            const sidebarToggle = document.querySelector('.sidebar-toggle');
+            const sidebar = document.querySelector('.sidebar');
+            const mainContent = document.querySelector('.main-content');
+            
+            if (sidebarToggle && sidebar) {
+                sidebarToggle.addEventListener('click', function() {
+                    sidebar.classList.toggle('active');
+                    mainContent.classList.toggle('sidebar-active');
+                });
+            }
+        });
+    </script>
 </body>
 
 </html>

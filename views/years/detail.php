@@ -3,7 +3,7 @@ require_once __DIR__ . '/../../config.php';
 session_start();
 
 if (!isset($_GET['id']) || !isset($_GET['year'])) {
-    header('Location: /bts-smkn1lmj-2025/');
+     header('Location: ' . $year . '/');
     exit;
 }
 
@@ -28,7 +28,7 @@ try {
     $book = $stmt->fetch();
     
     if (!$book) {
-        header('Location: /bts-smkn1lmj-2025/views/years/' . $year . '/');
+        header('Location: ' . $year . '/');
         exit;
     }
 
@@ -39,7 +39,7 @@ try {
 // Handle download request
 if (isset($_GET['download'])) {
     if (!empty($book['content_path'])) {
-        $filePath = __DIR__ . '/.././admin/public/uploads/' . $book['content_path'];
+        $filePath = __DIR__ . '/../../admin/public/uploads/' . $book['content_path'];
         
         if (file_exists($filePath)) {
             header('Content-Type: application/pdf');
@@ -49,7 +49,7 @@ if (isset($_GET['download'])) {
             exit;
         }
     }
-    header('Location: /bts-smkn1lmj-2025/views/years/' . $year . '/');
+    header('Location: ' . $year . '/');
     exit;
 }
 
@@ -81,7 +81,7 @@ if (isMobileDevice()) {
     
     // Only redirect if we're not already on the mobile page
     if (!currentPath.includes('detail-mobile.php')) {
-        window.location.href = `/bts-smkn1lmj-2025/views/years/detail-mobile.php?id=${params.id}&year=${params.year}`;
+        window.location.href = `detail-mobile.php?id=${params.id}&year=${params.year}`;
     }
 }
 </script>
@@ -99,7 +99,7 @@ if (isMobileDevice()) {
     <!-- HEADER -->
     <header class="header">
         <div class="header-content">
-            <a href="/bts-smkn1lmj-2025/">
+            <a href="">
                 <img src="../../public/assets/img/logosmk.png" alt="Logo SMK"> 
                 <p class="header-title">Buku Tahunan Siswa - <?= $year ?></p>
             </a>
@@ -149,7 +149,7 @@ if (isMobileDevice()) {
             </div>
         <?php endif; ?>
         
-        <a href="../../views/years/<?= $year ?>/" class="back-btn">
+        <a href="<?= $year ?>/" class="btn back-btn">
             <i class='bx bx-arrow-back'></i> Kembali ke Katalog <?= $year ?>
         </a>
     </main>
@@ -169,7 +169,7 @@ if (isMobileDevice()) {
             </div>
 
             <div class="footer-info">
-                <p class="copyright">© 2023 smkn1lmj. Buku Tahunan Siswa SMK Negeri 1 Lumajang</p>
+                <p class="copyright">© 2024 smkn1lmj. Buku Tahunan Siswa SMK Negeri 1 Lumajang</p>
                 <p class="credits">Desain Oleh Jurnalistik SMK Negeri 1 Lumajang | Rekayasa Perangkat Lunak Gen-12</p>
             </div>
         </div>
