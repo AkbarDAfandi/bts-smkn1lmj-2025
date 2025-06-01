@@ -44,10 +44,19 @@ try {
         $currentYearData = $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    // Extract YouTube ID from current year's sambutan
-    $youtubeId = 'IUqF6cAKR6Q'; // Default video ID
-    if ($currentYearData && preg_match('/(?:https?:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.be)\/(?:watch\?v=)?([a-zA-Z0-9_-]{11})/', $currentYearData['sambutan'], $matches)) {
-        $youtubeId = $matches[1];
+    // Extract all YouTube IDs from current year's sambutan
+    $youtubeIds = [];
+    if ($currentYearData && $currentYearData['sambutan']) {
+        preg_match_all('/(?:https?:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.be)\/(?:watch\?v=)?([a-zA-Z0-9_-]{11})/', $currentYearData['sambutan'], $matches);
+        if (!empty($matches[1])) {
+            $youtubeIds = $matches[1];
+        } else {
+            // If no videos found, use default
+            $youtubeIds[] = 'IUqF6cAKR6Q';
+        }
+    } else {
+        // If no sambutan data, use default
+        $youtubeIds[] = 'IUqF6cAKR6Q';
     }
 } catch (PDOException $e) {
     die("Database error: " . $e->getMessage());
@@ -62,7 +71,7 @@ $academicYears = getAllAcademicYears($pdo);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Buku Tahunan Siswa - <?= htmlspecialchars($selectedYear) ?></title>
-    <link rel="stylesheet" href="../../public/css/dua_empat.css">
+    <link rel="stylesheet" href="../../public/css/years.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="icon" href="/bts-smkn1lmj-2025/public/assets/img/logosmk.png" type="image/x-icon">
 </head>
@@ -85,13 +94,30 @@ $academicYears = getAllAcademicYears($pdo);
             <div class="video-container">
                 <div class="custom-video-frame">
                     <img src="/bts-smkn1lmj-2025/public/assets/img/border.png" class="frame-image" alt="Video Frame">
-                    <div class="youtube-video">
-                        <iframe src="https://www.youtube.com/embed/<?= $youtubeId ?>?autoplay=0"
-                            title="YouTube video player"
-                            frameborder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen></iframe>
+                    <div class="video-carousel">
+                        <?php foreach ($youtubeIds as $index => $youtubeId): ?>
+                            <div class="video-slide <?= $index === 0 ? 'active' : '' ?>" data-index="<?= $index ?>">
+                                <div class="youtube-video">
+                                    <iframe src="https://www.youtube.com/embed/<?= $youtubeId ?>?enablejsapi=1"
+                                        title="YouTube video player"
+                                        frameborder="0"
+                                        id="youtube-player-<?= $index ?>"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                        allowfullscreen></iframe>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
                     </div>
+                    <?php if (count($youtubeIds) > 1): ?>
+                        <div class="carousel-controls">
+                            <button class="carousel-prev" onclick="moveSlide(-1)">
+                                <i class='bx bx-chevron-left'></i>
+                            </button>
+                            <button class="carousel-next" onclick="moveSlide(1)">
+                                <i class='bx bx-chevron-right'></i>
+                            </button>
+                        </div>
+                    <?php endif; ?>
                 </div>
             </div>
 
@@ -172,11 +198,101 @@ $academicYears = getAllAcademicYears($pdo);
             </div>
 
             <div class="footer-info">
-                <p class="copyright">© 2023 smkn1lmj. Buku Tahunan Siswa SMK Negeri 1 Lumajang</p>
+                <p class="copyright">© 2024 smkn1lmj. Buku Tahunan Siswa SMK Negeri 1 Lumajang</p>
                 <p class="credits">Desain Oleh Jurnalistik SMK Negeri 1 Lumajang | Rekayasa Perangkat Lunak Gen-12</p>
             </div>
         </div>
     </footer>
+
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.video-slide');
+        const totalSlides = slides.length;
+        let players = [];
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        // Initialize YouTube API
+        function onYouTubeIframeAPIReady() {
+            // Create YouTube players for each video
+            slides.forEach((slide, index) => {
+                const iframe = slide.querySelector('iframe');
+                players[index] = new YT.Player(`youtube-player-${index}`, {
+                    events: {
+                        'onReady': onPlayerReady,
+                        'onStateChange': onPlayerStateChange
+                    }
+                });
+            });
+        }
+
+        function onPlayerReady(event) {
+            // When first video is ready, play it
+            if (event.target === players[0]) {
+                event.target.playVideo();
+            }
+        }
+
+        function onPlayerStateChange(event) {
+            // When a video starts playing, pause all other videos
+            if (event.data == YT.PlayerState.PLAYING) {
+                players.forEach((player, index) => {
+                    if (player && player !== event.target) {
+                        player.pauseVideo();
+                    }
+                });
+            }
+        }
+
+        // Touch events for mobile swipe
+        document.querySelector('.video-container').addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, false);
+
+        document.querySelector('.video-container').addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        }, false);
+
+        function handleSwipe() {
+            const swipeThreshold = 50; // minimum distance for swipe
+            const swipeDistance = touchEndX - touchStartX;
+
+            if (Math.abs(swipeDistance) > swipeThreshold) {
+                if (swipeDistance > 0) {
+                    // Swipe right - go to previous
+                    moveSlide(-1);
+                } else {
+                    // Swipe left - go to next
+                    moveSlide(1);
+                }
+            }
+        }
+
+        function moveSlide(direction) {
+            // Pause current video
+            if (players[currentSlide]) {
+                players[currentSlide].pauseVideo();
+            }
+
+            // Remove active class from current slide
+            slides[currentSlide].classList.remove('active');
+
+            // Calculate new slide index
+            currentSlide = (currentSlide + direction + totalSlides) % totalSlides;
+
+            // Add active class to new slide
+            slides[currentSlide].classList.add('active');
+
+            // Play the new video after a short delay to allow transition
+            setTimeout(() => {
+                if (players[currentSlide]) {
+                    players[currentSlide].playVideo();
+                }
+            }, 500);
+        }
+    </script>
 </body>
 
 </html>
