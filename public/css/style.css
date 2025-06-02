@@ -1,159 +1,159 @@
-@import url('https://fonts.googleapis.com/css2?family=Jacques+Francois&family=La+Belle+Aurore&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Inria+Serif:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Jacques+Francois&family=La+Belle+Aurore&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inria+Serif:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap");
 
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    text-decoration: none;
-    border: none;
-    outline: none;
-    scroll-behavior: smooth;
-    font-family: 'Poppins', sans-serif;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  border: none;
+  outline: none;
+  scroll-behavior: smooth;
+  font-family: "Poppins", sans-serif;
 }
 
 body {
-    min-height: 100vh;
-    width: 100%;
-    background-color: #f8f9fa;
-    overflow-x: hidden;
+  min-height: 100vh;
+  width: 100%;
+  background-color: #f8f9fa;
+  overflow-x: hidden;
 }
 
 header {
-    background-color: #f8f9fa;
-    height: 150px;
-    padding: 15px 20px; 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    width: 100%;
-    margin-bottom: -2rem;
+  background-color: #f8f9fa;
+  height: 150px;
+  padding: 15px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: -2rem;
 }
 
 .logo-container {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .logo-container img {
-    height: 50px;
-    margin-right: 15px;
+  height: 50px;
+  margin-right: 15px;
 }
 
 header p {
-    color: #000000;
-    font-size: 90px;
-    font-family: "La Belle Aurore", cursive;
-    margin-top: -10px;
-    text-align: center;
+  color: #000000;
+  font-size: 90px;
+  font-family: "La Belle Aurore", cursive;
+  margin-top: -10px;
+  text-align: center;
 }
 
 header span {
-    color: #000000;
-    font-size: 60px;
-    font-family: "La Belle Aurore", cursive;
-    display: block;
-    margin-top: -60px;
-    margin-bottom: -70px;
-    text-align: center;
+  color: #000000;
+  font-size: 60px;
+  font-family: "La Belle Aurore", cursive;
+  display: block;
+  margin-top: -60px;
+  margin-bottom: -70px;
+  text-align: center;
 }
 
 .swiper {
-    width: 100%;
-    padding: 0 20px;
-    overflow: hidden;
+  width: 100%;
+  padding: 0 20px;
+  overflow: hidden;
 }
 
 .swiper-wrapper {
-    height: 42em;
-    display: flex;
-    align-items: center;
-    flex-wrap: nowrap;
-    transition: transform 0.3s ease;
-    scrollbar-width: none;  /* Firefox */
-    -ms-overflow-style: none;  /* IE and Edge */
+  height: 42em;
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  transition: transform 0.3s ease;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
 }
 
 .swiper-wrapper::-webkit-scrollbar {
-    display: none;  /* Chrome, Safari and Opera */
+  display: none; /* Chrome, Safari and Opera */
 }
 
 .card {
-    width: 17em;
-    height: 60%;
-    background-color: #ffffff;
-    border-radius: 35px;
-    box-shadow: 0 0 2em rgba(0, 0, 0, .2);
-    overflow: hidden;
-    position: relative;
-    margin: 0 2em;
-    flex: 0 0 auto;
+  width: 17em;
+  height: 60%;
+  background-color: #ffffff;
+  border-radius: 35px;
+  box-shadow: 0 0 2em rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  position: relative;
+  margin: 0 2em;
+  flex: 0 0 auto;
 }
 
 .card_image {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 .card_image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
 }
 
 footer {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    margin-top: -2rem;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: -2rem;
 }
 
 .footer {
-    background-color: #f8f9fa;
-    padding: 20px 0;
-    text-align: center;
-    width: 100%;
-    position: relative;
+  background-color: #f8f9fa;
+  padding: 20px 0;
+  text-align: center;
+  width: 100%;
+  position: relative;
 }
 
 .title-footer h2 {
-    border-bottom: 2px solid #000;
-    height: 40px;
-    margin: 10px;
-    font-family: "Inria Serif", serif;
-    font-weight: 400;
+  border-bottom: 2px solid #000;
+  height: 40px;
+  margin: 10px;
+  font-family: "Inria Serif", serif;
+  font-weight: 400;
 }
 
-.footer-content p{
-    font-family: "Inria Serif", serif;
-    font-weight: 400;
+.footer-content p {
+  font-family: "Inria Serif", serif;
+  font-weight: 400;
 }
 
 @media screen and (max-width: 768px) {
-    .footer {
-        padding: 15px 0;
-    }
-    
-    .title-footer h2 {
-        font-size: 1.5rem;
-        margin: 15px;
-        height: 35px;
-    }
+  .footer {
+    padding: 15px 0;
+  }
+
+  .title-footer h2 {
+    font-size: 1.5rem;
+    margin: 15px;
+    height: 35px;
+  }
 }
 
 @media screen and (max-width: 480px) {
-    .footer {
-        padding: 10px 0;
-    }
-    
-    .title-footer h2 {
-        font-size: 1.2rem;
-        margin: 10px;
-        height: 30px;
-    }
+  .footer {
+    padding: 10px 0;
+  }
+
+  .title-footer h2 {
+    font-size: 1.2rem;
+    margin: 10px;
+    height: 30px;
+  }
 }

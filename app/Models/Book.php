@@ -63,7 +63,7 @@
         {
             $stmt = $this->pdo->prepare("SELECT b.* FROM books b
                                     WHERE b.category_id = ? AND b.tahun_akademik_id = ?
-                                    ORDER BY b.judul ASC");
+                                    ");
             $stmt->execute([$categoryId, $year]);
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }

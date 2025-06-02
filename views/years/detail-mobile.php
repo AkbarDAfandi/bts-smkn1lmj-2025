@@ -389,7 +389,7 @@ $isTeacherBook = ($book['category_id'] == 2);
             </div>
         <?php endif; ?>
 
-        <a href="<?= $year ?>/" class="btn back-btn">
+        <a href="/bts-smkn1lmj-2025/views/years/years.php?tahun=<?= $year ?>" class="btn back-btn">
             <i class='bx bx-arrow-back'></i> Kembali ke Katalog <?= $year ?>
         </a>
     </main>

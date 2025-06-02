@@ -5,16 +5,30 @@ require_once  __DIR__ . '/../../admin/views/tahun/function_year.php';
 session_start();
 
 try {
+    // Get selected year from URL parameter
+    $selectedYear = isset($_GET['tahun']) ? $_GET['tahun'] : date('Y');
+
+    // Get tahun_akademik_id for the selected year
+    $stmtYear = $pdo->prepare("SELECT id, sambutan FROM tahun_akademik WHERE tahun = ?");
+    $stmtYear->execute([$selectedYear]);
+    $yearData = $stmtYear->fetch(PDO::FETCH_ASSOC);
+
+    if (!$yearData) {
+        die("Tahun akademik tidak ditemukan");
+    }
+
+    $tahunAkademikId = $yearData['id'];
+
     // Ambil semua kategori dari database
     $stmt = $pdo->query("SELECT id, name FROM categories");
     $categories = $stmt->fetchAll(PDO::FETCH_KEY_PAIR);
 
-    // Ambil data buku berdasarkan kategori (kecuali guru dan osis)
+    // Ambil data buku berdasarkan kategori dan tahun akademik
     $booksByCategory = [];
     foreach ($categories as $id => $name) {
-        if ($id != 2 && $id != 5) { // Skip kategori guru (2) dan osis (4)
-            $stmt = $pdo->prepare("SELECT * FROM books WHERE category_id = ? AND tahun_akademik_id = 1");
-            $stmt->execute([$id]);
+        if ($id != 2 && $id != 5) { // Skip kategori guru (2) dan osis (5)
+            $stmt = $pdo->prepare("SELECT * FROM books WHERE category_id = ? AND tahun_akademik_id = ?");
+            $stmt->execute([$id, $tahunAkademikId]);
             $books = $stmt->fetchAll();
 
             if (!empty($books)) {
@@ -27,35 +41,25 @@ try {
     }
 
     // Ambil data khusus guru (kategori 2)
-    $stmt = $pdo->query("SELECT * FROM books WHERE category_id = 2 AND tahun_akademik_id = 1");
+    $stmt = $pdo->prepare("SELECT * FROM books WHERE category_id = 2 AND tahun_akademik_id = ?");
+    $stmt->execute([$tahunAkademikId]);
     $teacherBooks = $stmt->fetchAll();
 
     // Ambil data khusus osis (kategori 5)
-    $stmt = $pdo->query("SELECT * FROM books WHERE category_id = 5 AND tahun_akademik_id = 1");
+    $stmt = $pdo->prepare("SELECT * FROM books WHERE category_id = 5 AND tahun_akademik_id = ?");
+    $stmt->execute([$tahunAkademikId]);
     $osisBooks = $stmt->fetchAll();
 
-    // Get the current academic year's YouTube link
-    $selectedYear = isset($_GET['tahun']) ? $_GET['tahun'] : null;
-    $currentYearData = null;
-
-    if ($selectedYear) {
-        $stmt = $pdo->prepare("SELECT sambutan FROM tahun_akademik WHERE tahun = ?");
-        $stmt->execute([$selectedYear]);
-        $currentYearData = $stmt->fetch(PDO::FETCH_ASSOC);
-    }
-
-    // Extract all YouTube IDs from current year's sambutan
+    // Extract YouTube IDs from current year's sambutan
     $youtubeIds = [];
-    if ($currentYearData && $currentYearData['sambutan']) {
-        preg_match_all('/(?:https?:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.be)\/(?:watch\?v=)?([a-zA-Z0-9_-]{11})/', $currentYearData['sambutan'], $matches);
+    if ($yearData && $yearData['sambutan']) {
+        preg_match_all('/(?:https?:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.be)\/(?:watch\?v=)?([a-zA-Z0-9_-]{11})/', $yearData['sambutan'], $matches);
         if (!empty($matches[1])) {
             $youtubeIds = $matches[1];
         } else {
-            // If no videos found, use default
             $youtubeIds[] = 'IUqF6cAKR6Q';
         }
     } else {
-        // If no sambutan data, use default
         $youtubeIds[] = 'IUqF6cAKR6Q';
     }
 } catch (PDOException $e) {
@@ -127,7 +131,7 @@ $academicYears = getAllAcademicYears($pdo);
                 <?php if (!empty($teacherBooks)): ?>
                     <?php foreach ($teacherBooks as $book): ?>
                         <div class="button-card">
-                            <a href="/bts-smkn1lmj-2025/views/years/detail.php?id=<?= $book['id'] ?>&year=<?= urlencode($selectedYear) ?>" class="card-link">
+                            <a href="detail.php?id=<?= $book['id'] ?>&year=<?= $selectedYear ?>" class="card-link">
                                 <img src="/bts-smkn1lmj-2025/admin/public/uploads/<?= $book['cover_path'] ?>"
                                     alt="<?= htmlspecialchars($book['judul']) ?>"
                                     class="card-image"
@@ -142,7 +146,7 @@ $academicYears = getAllAcademicYears($pdo);
                 <?php if (!empty($osisBooks)): ?>
                     <?php foreach ($osisBooks as $book): ?>
                         <div class="button-card-osis">
-                            <a href="/bts-smkn1lmj-2025/views/years/detail.php?id=<?= $book['id'] ?>&year=<?= urlencode($selectedYear) ?>" class="card-link">
+                            <a href="detail.php?id=<?= $book['id'] ?>&year=<?= $selectedYear ?>" class="card-link">
                                 <img src="/bts-smkn1lmj-2025/admin/public/uploads/<?= $book['cover_path'] ?>"
                                     alt="<?= htmlspecialchars($book['judul']) ?>"
                                     class="card-image"
@@ -155,7 +159,7 @@ $academicYears = getAllAcademicYears($pdo);
             </div>
         </section>
 
-        <!-- TAMPILAN UNTUK SEMUA KATEGORI KECUALI GURU -->
+        <!-- TAMPILAN UNTUK SEMUA KATEGORI KECUALI GURU DAN OSIS -->
         <?php if (!empty($booksByCategory)): ?>
             <?php foreach ($booksByCategory as $category): ?>
                 <section class="content-book">
@@ -169,7 +173,10 @@ $academicYears = getAllAcademicYears($pdo);
                                 <h1><?= htmlspecialchars($book['judul']) ?></h1>
                                 <h2>Oleh <?= htmlspecialchars($book['penerbit'] ?? 'SMKN 1 Lumajang') ?></h2>
                                 <hr style="height:0.05em; border-width:0; background-color:black; margin-bottom:10px">
-                                <a href="/bts-smkn1lmj-2025/views/years/detail.php?id=<?= $book['id'] ?>&year=<?= urlencode($selectedYear) ?>">
+                                <?php
+                                $isMobile = preg_match("/(android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini)/i", $_SERVER['HTTP_USER_AGENT']);
+                                ?>
+                                <a href="<?= $isMobile ? 'detail-mobile.php' : 'detail.php' ?>?id=<?= $book['id'] ?>&year=<?= $selectedYear ?>">
                                     <button>Lihat selengkapnya</button>
                                 </a>
                             </div>
@@ -179,7 +186,7 @@ $academicYears = getAllAcademicYears($pdo);
             <?php endforeach; ?>
         <?php else: ?>
             <section class="content-book">
-                <p>Tidak ada data buku tersedia</p>
+                <p>Tidak ada data buku tersedia untuk tahun <?= htmlspecialchars($selectedYear) ?></p>
             </section>
         <?php endif; ?>
     </main>

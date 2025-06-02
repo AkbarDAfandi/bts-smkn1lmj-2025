@@ -5,14 +5,21 @@ require_once  'config.php';
 // Get current year
 $currentYear = date('Y');
 
-// Get years data from database
+// Get years data from database and sort by year in descending order (newest first)
 try {
-    $stmt = $pdo->query("SELECT tahun, cover_path FROM tahun_akademik ORDER BY tahun ASC");
+    $stmt = $pdo->query("SELECT tahun, cover_path FROM tahun_akademik ORDER BY tahun DESC");
     $yearsData = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // Get the newest year from the data
+    $newestYear = !empty($yearsData) ? $yearsData[0]['tahun'] : $currentYear;
 } catch (PDOException $e) {
     error_log("Error fetching years: " . $e->getMessage());
     $yearsData = [];
+    $newestYear = $currentYear;
 }
+
+// Reverse the array back to ascending order for display
+$yearsData = array_reverse($yearsData);
 ?>
 
 <!DOCTYPE html>
@@ -26,14 +33,15 @@ try {
     <link rel="icon" href="public/assets/img/logosmk.png" type="image/x-icon">
     <title>Buku Tahunan Siswa</title>
     <style>
-        .card.current-year {
+        .card.newest-year {
             transform: scale(1.1);
             box-shadow: 0 0 30px rgba(74, 107, 175, 0.6);
             z-index: 10;
             position: relative;
         }
 
-        .card.current-year::after {
+        .card.newest-year::after {
+            content: 'Terbaru';
             position: absolute;
             top: -15px;
             left: 50%;
@@ -71,7 +79,7 @@ try {
     <section class="swiper mySwiper">
         <div class="swiper-wrapper">
             <?php foreach ($yearsData as $yearData): ?>
-                <div class="card swiper-slide <?= $currentYear == $yearData['tahun'] ? 'current-year' : '' ?>">
+                <div class="card swiper-slide <?= $newestYear == $yearData['tahun'] ? 'newest-year' : '' ?>">
                     <div class="card_image">
                         <a href="views/years/years.php?tahun=<?= $yearData['tahun'] ?>">
                             <?php if (!empty($yearData['cover_path'])): ?>
@@ -130,13 +138,25 @@ try {
                 }
             `;
             document.head.appendChild(style);
-        } else {
-            // Get current year index for initial slide
-            const years = <?= json_encode(array_column($yearsData, 'tahun')) ?>;
-            const currentYearIndex = years.indexOf(<?= $currentYear ?>);
-            const initialSlide = currentYearIndex !== -1 ? currentYearIndex : 0;
 
-            // Initialize Swiper normally for other browsers
+            // Auto scroll to newest year for Safari/Firefox
+            const newestYearElement = document.querySelector('.newest-year');
+            if (newestYearElement) {
+                setTimeout(() => {
+                    newestYearElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'center',
+                        inline: 'center'
+                    });
+                }, 100);
+            }
+        } else {
+            // Get newest year index for initial slide
+            const years = <?= json_encode(array_column($yearsData, 'tahun')) ?>;
+            const newestYearIndex = years.indexOf(<?= $newestYear ?>);
+            const initialSlide = newestYearIndex !== -1 ? newestYearIndex : 0;
+
+            // Initialize Swiper
             var swiper = new Swiper(".mySwiper", {
                 loop: false,
                 loopAdditionalSlides: 2,
