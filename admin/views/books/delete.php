@@ -1,7 +1,7 @@
 <?php
 session_start();
 require_once __DIR__ . '../../../../config.php';
-require_once __DIR__ . '/../../../app/models/Book.php';
+require_once __DIR__ . '/../../../app/Models/Book.php';
 
 // Check admin session
 if (!isset($_SESSION['admin_id']) || $_SESSION['admin_role'] !== 'admin') {

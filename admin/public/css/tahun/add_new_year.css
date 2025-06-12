@@ -1,81 +1,193 @@
+/* General Styling */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f5f7fa;
+    color: #333;
+    line-height: 1.6;
+}
 
-    .container-wrapper {
-        display: flex;
-        margin-top: 100px;
-        justify-content: center;
-        align-items: center;
-        /* asumsi header 60px */
-        background-color: #f8f9fc;
+.main-content {
+    margin-left: 250px;
+    padding: 20px;
+    transition: margin-left 0.3s;
+}
+
+.header {
+    margin-bottom: 30px;
+}
+
+.greeting {
+    color: #2c3e50;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+/* Container Styling */
+.container-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.new-year-container {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    margin-bottom: 30px;
+}
+
+.new-year-container h2 {
+    color: #3498db;
+    font-size: 22px;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+/* Form Styling */
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.form-group input[type="number"],
+.form-group input[type="file"],
+.form-group textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+.form-group input[type="number"]:focus,
+.form-group textarea:focus {
+    border-color: #3498db;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+}
+
+.form-group textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+/* File Input Styling */
+.file-input-wrapper {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    width: 100%;
+}
+
+.file-input-wrapper input[type="file"] {
+    position: absolute;
+    font-size: 100px;
+    opacity: 0;
+    right: 0;
+    top: 0;
+    cursor: pointer;
+}
+
+.file-input-wrapper::before {
+    content: 'Pilih File';
+    display: inline-block;
+    background: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 12px 15px;
+    outline: none;
+    white-space: nowrap;
+    cursor: pointer;
+    font-weight: 600;
+    color: #2c3e50;
+    width: 100%;
+    text-align: center;
+}
+
+.file-input-wrapper:hover::before {
+    background: #e9ecef;
+}
+
+.file-requirements {
+    font-size: 13px;
+    color: #7f8c8d;
+    margin-top: 5px;
+    font-style: italic;
+}
+
+/* Button Styling */
+.btn-submit, .btn-cancel {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-right: 10px;
+}
+
+.btn-submit {
+    background-color: #3498db;
+    color: white;
+}
+
+.btn-submit:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px);
+}
+
+.btn-cancel {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.btn-cancel:hover {
+    background-color: #c0392b;
+    transform: translateY(-2px);
+}
+
+/* Message Styling */
+.success-message {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 12px 15px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    border: 1px solid #c3e6cb;
+}
+
+.error-message {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 12px 15px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    border: 1px solid #f5c6cb;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .main-content {
+        margin-left: 0;
+        padding: 15px;
     }
-
+    
     .new-year-container {
-        max-width: 500px;
+        padding: 20px;
+    }
+    
+    .btn-submit, .btn-cancel {
         width: 100%;
-        padding: 30px;
-        background: #ffffff;
-        border-radius: 10px;
-        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+        margin-bottom: 10px;
     }
-
-
-
-    .btn-cancel {
-        background-color: #6c757d;
-        color: white;
-        border: none;
-        padding: 12px 20px;
-        border-radius: 5px;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.3s ease;
-    }
-
-    .btn-cancel:hover {
-        background-color: #5a6268;
-    }
-
-
-    .form-group {
-        margin-bottom: 20px;
-    }
-
-    label {
-        display: block;
-        margin-bottom: 8px;
-        font-weight: 600;
-        color: #343a40;
-    }
-
-    input[type="number"] {
-        width: 100%;
-        padding: 10px;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-        font-size: 16px;
-    }
-
-    .btn-submit {
-        background-color: #4e73df;
-        color: white;
-        border: none;
-        padding: 12px 20px;
-        border-radius: 5px;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.3s ease;
-    }
-
-    .btn-submit:hover {
-        background-color: #3a5bc7;
-    }
-
-    .error-message {
-        color: #e74a3b;
-        margin-top: 5px;
-    }
-
-    .success-message {
-        color: #1cc88a;
-        margin-bottom: 20px;
-    }
-
+}

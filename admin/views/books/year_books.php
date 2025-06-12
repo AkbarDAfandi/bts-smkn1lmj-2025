@@ -1,7 +1,7 @@
 <?php
 session_start();
 require_once __DIR__ . '../../../../config.php';
-require_once __DIR__ . '../../../../app/models/Book.php';
+require_once __DIR__ . '../../../../app/Models/Book.php';
 require_once __DIR__ . '../../tahun/function_year.php';
 
 // Cek session dan role
@@ -135,14 +135,14 @@ try {
                                 onclick="return confirm('Apakah Anda yakin ingin menghapus buku ini?')">
                                 <i class="fas fa-trash"></i> Delete
                             </a>
-                               <a href="../../../public/uploads/<?= $buku['content_path'] ?>" class="btn-action btn-view"
+                               <a href="../../public/uploads/<?= $buku['content_path'] ?>" class="btn-action btn-view"
                                 target="_blank">
                                 <i class="fas fa-eye"></i>
                             </a>
                         </div>
                     </div>
                 </div>
-                <?php endforeach; ?>
+                <?php endforeach;?>
             </div>
         </div>
         <?php endforeach; ?>

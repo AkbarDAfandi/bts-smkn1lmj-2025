@@ -1,14 +1,14 @@
 <?php
 session_start();
 require_once __DIR__ . '../../../../config.php';
-require_once __DIR__ . '../../../../app/models/Book.php';
-require_once __DIR__ . '../../../../app/models/Category.php';
+require_once __DIR__ . '../../../../app/Models/Book.php';
+require_once __DIR__ . '../../../../app/Models/Category.php';
 require_once __DIR__ . '../../tahun/function_year.php';
 
 // Check session and role
 if (!isset($_SESSION['admin_id']) || $_SESSION['admin_role'] !== 'admin') {
     $_SESSION['error'] = "Anda tidak memiliki akses ke halaman ini";
-    header("Location: ../../../index.php");
+    header("Location: index.php");
     exit();
 }
 
@@ -59,10 +59,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 throw new Exception("Format cover tidak valid. Gunakan JPG, PNG, atau GIF");
             }
 
-            if (move_uploaded_file($coverFile['tmp_name'], '../../../../public/uploads/' . $cover_path)) {
+            if (move_uploaded_file($coverFile['tmp_name'], '/../../public/uploads/' . $cover_path)) {
                 // Delete old cover if exists
-                if ($book['cover_path'] && file_exists('../../../../public/uploads/' . $book['cover_path'])) {
-                    unlink('../../../../public/uploads/' . $book['cover_path']);
+                if ($book['cover_path'] && file_exists('/../../public/uploads/' . $book['cover_path'])) {
+                    unlink('/../../public/uploads/' . $book['cover_path']);
                 }
             } else {
                 throw new Exception("Gagal mengupload cover buku");
@@ -81,10 +81,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 throw new Exception("Format file tidak valid. Gunakan PDF");
             }
 
-            if (move_uploaded_file($contentFile['tmp_name'], '../../../../public/uploads/' . $content_path)) {
+            if (move_uploaded_file($contentFile['tmp_name'], '/../../public/uploads/' . $content_path)) {
                 // Delete old content if exists
-                if ($book['content_path'] && file_exists('../../../../public/uploads/' . $book['content_path'])) {
-                    unlink('../../../../public/uploads/' . $book['content_path']);
+                if ($book['content_path'] && file_exists('/../../public/uploads/' . $book['content_path'])) {
+                    unlink('/../../public/uploads/' . $book['content_path']);
                 }
             } else {
                 throw new Exception("Gagal mengupload file buku");
@@ -193,7 +193,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <?php if ($book['content_path']): ?>
                         <div class="file-preview">
                             <p>File Saat Ini: <?= htmlspecialchars(basename($book['content_path'])) ?></p>
-                            <a href="../../../public/uploads/<?= htmlspecialchars($book['content_path']) ?>" target="_blank" class="btn-view">
+                            <a href="../../public/uploads/<?= htmlspecialchars($book['content_path']) ?>" target="_blank" class="btn-view">
                                 <i class="fas fa-eye"></i> Lihat File
                             </a>
                         </div>
