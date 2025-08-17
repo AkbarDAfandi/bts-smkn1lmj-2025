@@ -40,7 +40,8 @@ function getAcademicYearId($pdo, $year)
 function getYearsWithDetails($pdo)
 {
     try {
-        $stmt = $pdo->query("SELECT tahun, cover_path, sambutan FROM tahun_akademik ORDER BY tahun DESC");
+        // $stmt = $pdo->query("SELECT tahun, cover_path, sambutan FROM tahun_akademik ORDER BY tahun DESC");
+        $stmt = $pdo->query("SELECT id, tahun, cover_path, sambutan FROM tahun_akademik ORDER BY tahun DESC");
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     } catch (PDOException $e) {
         error_log("Error fetching years with details: " . $e->getMessage());

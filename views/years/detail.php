@@ -137,7 +137,7 @@ if (isMobileDevice()) {
         </div>
 
         <?php if (!empty($book['content_path'])): ?>
-            <div class="pdf-viewer-container">
+            <div class="pdf-viewer-container" >
                 <iframe src="../../admin/public/uploads/<?= $book['content_path'] ?>#toolbar=0" 
                         class="pdf-viewer">
                     Browser Anda tidak mendukung PDF. Silakan download <a href="?id=<?= $_GET['id'] ?>&year=<?= $year ?>&download=1">di sini</a>.
@@ -169,10 +169,11 @@ if (isMobileDevice()) {
             </div>
 
             <div class="footer-info">
-                <p class="copyright">© 2024 smkn1lmj. Buku Tahunan Siswa SMK Negeri 1 Lumajang</p>
+                <p class="copyright">© 2025 smkn1lmj. Buku Tahunan Siswa SMK Negeri 1 Lumajang</p>
                 <p class="credits">Desain Oleh Jurnalistik SMK Negeri 1 Lumajang | Rekayasa Perangkat Lunak Gen-12</p>
             </div>
         </div>
     </footer>
+    
 </body>
 </html>

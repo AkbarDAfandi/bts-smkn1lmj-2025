@@ -41,7 +41,6 @@ $yearsData = array_reverse($yearsData);
         }
 
         .card.newest-year::after {
-            content: 'Terbaru';
             position: absolute;
             top: -15px;
             left: 50%;

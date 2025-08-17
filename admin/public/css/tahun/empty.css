@@ -385,6 +385,54 @@ body {
   }
 }
 
+/* edit empty */
+/* Gaya untuk tombol edit di dalam card-footer */
+
+.card-footer {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: auto;
+  padding-top: 15px;
+}
+
+.btn-edit,
+.btn-view {
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.9rem;
+  text-decoration: none;
+}
+
+.btn-edit {
+  background: #ffc107; /* Warna kuning */
+  color: white;
+}
+
+.btn-edit:hover {
+  background: #e0a800; /* Warna yang lebih gelap saat hover */
+}
+
+.btn-view {
+  background: #4e73df;
+  color: white;
+}
+
+.btn-view:hover {
+  background: #2e59d9;
+  transform: translateX(0); /* Hapus transform di sini karena sudah ada di hover card */
+}
+
+/* Hapus transform dari card-footer di hover year-card agar tombol tidak bergeser */
+.year-card:hover .btn-view {
+  transform: none;
+}
 @media (max-width: 480px) {
   .year-grid {
     grid-template-columns: 1fr;

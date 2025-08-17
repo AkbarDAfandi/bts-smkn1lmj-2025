@@ -247,7 +247,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                     <div class="form-group">
                         <label for="sambutan"><i class="fas fa-quote-left"></i> Sambutan:</label>
-                        <textarea id="sambutan" name="sambutan" placeholder="Masukkan teks sambutan dan link YouTube (jika ada) di sini..."></textarea>
+                        <textarea id="sambutan" name="sambutan" placeholder="Masukkan teks sambutan dan link YouTube (jika ada) di sini... dan pisahkan dengan enter jika lebih dari satu"></textarea>
                     </div>
 
                     <div class="form-actions">

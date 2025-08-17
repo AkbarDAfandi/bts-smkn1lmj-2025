@@ -336,9 +336,15 @@ if (isset($_GET['delete']) && is_numeric($_GET['delete'])) {
                                         <?php endif; ?>
                                     </div>
                                     <div class="card-footer">
-                                        <button class="btn-view" title="Lihat detail">
+                                        <!-- <button class="btn-view" title="Lihat detail">
                                             <i class="fas fa-arrow-right"></i> Lihat Detail
-                                        </button>
+                                        </button> -->
+                                        <a href="edit_year.php?id=<?= $yearData['id'] ?>" class="btn-edit" title="Edit tahun <?= $yearData['tahun'] ?>">
+                                        <i class="fas fa-edit"></i> Edit
+                                        </a>
+                                        <a href="../books/year_books.php?tahun=<?= $yearData['tahun'] ?>" class="btn-view" title="Lihat detail">
+                                            <i class="fas fa-arrow-right"></i> Lihat Detail
+                                        </a>
                                     </div>
                                 </div>
                             </div>

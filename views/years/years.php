@@ -205,7 +205,7 @@ $academicYears = getAllAcademicYears($pdo);
             </div>
 
             <div class="footer-info">
-                <p class="copyright">© 2024 smkn1lmj. Buku Tahunan Siswa SMK Negeri 1 Lumajang</p>
+                <p class="copyright">© 2025 smkn1lmj. Buku Tahunan Siswa SMK Negeri 1 Lumajang</p>
                 <p class="credits">Desain Oleh Jurnalistik SMK Negeri 1 Lumajang | Rekayasa Perangkat Lunak Gen-12</p>
             </div>
         </div>
