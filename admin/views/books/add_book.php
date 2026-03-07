@@ -34,6 +34,7 @@ if (!$tahunAkademikId) {
     exit();
 }
 
+// var_dump($_POST); var_dump($_FILES); die();
 // Proses form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $judul = $_POST['judul'];
@@ -41,8 +42,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $kategori_id = $_POST['category_id'];
 
     // Handle file uploads
-    $uploadDirCover = __DIR__ . '/../../public/uploads/cover/';
-    $uploadDirContent = __DIR__ . '/../../public/uploads/content/';
+    // $uploadDirCover = __DIR__ . '/../../public/uploads/cover/';
+    // $uploadDirContent = __DIR__ . '/../../public/uploads/content/';
+    $basePath = realpath(__DIR__ . '/../../'); 
+    $uploadDirCover = $basePath . '/public/uploads/cover/';
+    $uploadDirContent = $basePath . '/public/uploads/content/';
+
+    if (!$basePath) {
+        die("Error: The base path could not be resolved. Check your directory levels.");
+    }
 
     // Buat direktori jika belum ada
     if (!file_exists($uploadDirCover)) {
@@ -72,10 +80,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $coverFilename = uniqid('cover_') . '.' . $coverExt;
         $coverPath = 'cover/' . $coverFilename;
         if (!move_uploaded_file($_FILES['cover']['tmp_name'], $uploadDirCover . $coverFilename)) {
-            $_SESSION['error'] = "Gagal mengupload file cover";
-            header("Location: add_book.php?tahun=" . $selectedYear);
+            // $_SESSION['error'] = "Gagal mengupload file cover";
+            // header("Location: add_book.php?tahun=" . $selectedYear);
+            echo "Upload failed!<br>";
+            echo "Target Directory: " . $uploadDirCover . "<br>";
+            echo "Is directory writable? " . (is_writable($uploadDirCover) ? 'Yes' : 'No') . "<br>";
+            // header("Location: add_book.php?tahun=" . $selectedYear);
             exit();
-        }
+       }
     }
 
     // Validasi ukuran file content (maks 10MB)
